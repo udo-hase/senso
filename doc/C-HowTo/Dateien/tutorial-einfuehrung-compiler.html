@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Compiler Programmieren in C HowTo</title>
+<meta name="description" content="Erkl&auml;rung der Funktionsweise eines Compilers beim &Uuml;bersetzen von Quellcode in Maschinencode." />
+<meta name="keywords" content="compiler, Programm, &uuml;bersetzung, Quellcode, Erkl&auml;rung, Maschinencode" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-einfuehrung-compiler.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-anfang.html" title="">Der Anfang</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-compiler-linux.html" title="Kompilieren unter Linux Programmieren in C">Linux</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Einf&uuml;hrung</h2>
+<h3>Compiler</h3></div>
+<div id="content">
+
+
+<a name="15"></a>
+<div class="exText">
+<p>Wie wir bereits gelernt haben, gibt es Programmiersprachen, weil wir die Sprache des Computers (Nullen und Einsen) nicht effektiv beherrschen k&ouml;nnen. Wir schreiben deshalb unser Programm in einer Programmiersprache, auch Hochsprache genannt. Diese wird jedoch nicht vom Computer verstanden und muss also in Nullen und Einsen &uuml;bersetzt werden. Dies ist Aufgabe des <strong>Compilers</strong>:</p>
+</div>
+
+
+<a name="14"></a>
+<img src="pictures/0000000014/5_0000000001.gif" alt="Compiler" />
+
+<a name="19"></a>
+<div class="exText">
+<p>Der Inhalt des Zielprogramms besteht nur aus zwei unterschiedlichen Zeichen (&quot;0&quot; und &quot;1&quot;), deshalb nennt man es auch Bin&auml;rprogramm (bin&auml;r, lat. &quot;aus zwei Einheiten bestehend&quot;). Im Englischen w&uuml;rde man es &quot;binaries&quot; oder &quot;excuteable&quot; (ausf&uuml;hrbar) nennen. Das Quellprogramm nennt man auch Quelltext oder Quell-Code; im Englischen &quot;Source&quot;, &quot;Source Files&quot; oder &quot;Source Code (&quot;Source&quot; = Quelle, &quot;File&quot; = Datei).</p>
+</div>
+
+
+<a name="18"></a>
+<div class="exText">
+<h4>Aufgaben des Compilers</h4>
+<p>Beim &Uuml;bersetzungsvorgang, auch &quot;Kompilierung&quot; genannt, hat der Compiler die im Folgenden genannten Aufgaben. Die Fehler die dabei auftreten k&ouml;nnen, werden anhand des Programmbeispiels &quot;<a href="tutorial-einfuehrung-hello-world.html">Hello World</a>&quot;-Programm veranschaulicht.</p>
+<ul>
+<li><strong>Lexikalische Analyse</strong>: Hier zerteilt der Compiler die W&ouml;rter und Zeichen des Quellprogramms in verschiedene Klassen. So w&uuml;rde der printf-Befehl z.B. in 2 Klassen unterteilt werden. Zum einen &quot;printf&quot; als Befehl und zum anderen &quot;Hello World&quot; als Zeichenkette. &Uuml;berfl&uuml;ssige und fehlende Zeichen werden hier als Fehler erkannt, z.b. wenn eine Zeichenkette nicht wieder geschlossen wird: &quot;Hello World.</li>
+<li><strong>Syntaktische Analyse</strong>: Hier wird die Grammatik unseres Quellprogramms gepr&uuml;ft. W&uuml;rden wir statt &quot;printf(&quot;hello&quot;);&quot; nur &quot;printf &quot;hello&quot;;&quot; schreiben, ist das ein Fehler.</li>
+<li><strong>Semantische Analyse</strong>: Hier wird gepr&uuml;ft, ob unser Quellprogramm &uuml;berhaupt einen Sinn ergibt. Unser printf Befehl z.B. ben&ouml;tigt einen Text, den er ausgeben kann. Geben wir ihm aber nur eine Zahl, wie &quot;printf(4711);&quot; oder w&uuml;rde wir statt &quot;printf&quot; nur &quot;print&quot; schreiben, w&auml;re das falsch.</li></ul>
+<p>Findet der Compiler einen Fehler, wird die Kompilierung abgebrochen. Der Compiler gibt die Fehlermeldungen mit Zeilennummern aus, so hat man es nicht ganz so schwer die Fehler in seinem Programm zu finden.</p>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-anfang.html" title="">Der Anfang</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-compiler-linux.html" title="Kompilieren unter Linux Programmieren in C">Linux</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programmieren.html">Programmieren</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programm.html">Programm?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-c.html">Warum C?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hello-world.html">Hello World</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-anfang.html">Der Anfang</a></li>
+<li class="level3a"><a href="tutorial-einfuehrung-compiler.html">Compiler</a></li>
+<li class="level4"><a href="tutorial-einfuehrung-compiler-linux.html">Linux</a></li>
+<li class="level4"><a href="tutorial-einfuehrung-compiler-windows.html">Windows</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-kommentare.html">Kommentare</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-binaersystem.html">Bin&auml;rsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hexadezimalsystem.html">Hexadezimalsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-bits-bytes.html">Bits und Bytes</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

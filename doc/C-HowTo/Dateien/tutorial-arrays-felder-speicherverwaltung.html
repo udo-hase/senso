@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Speicherverwaltung Programmieren in C HowTo</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-arrays-felder-speicherverwaltung.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-arrays-felder-zeigerarithmetik-mehrdimensional.html" title="">Mehrdimensional</a></div>
+	<div class="nextLink"><a href="tutorial-arrays-felder-uebungen.html" title="">&Uuml;bungen</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Arrays (Felder)</h2>
+<h3>Speicherverwaltung</h3></div>
+<div id="content">
+
+
+<a name="440"></a>
+<div class="exText">
+<p>In den bisherigen Kapiteln haben wir Felder deklariert, bei denen die Gr&ouml;&szlig;e zur Compilezeit bereits feststand. Oftmals ist die wirklich ben&ouml;tigte Gr&ouml;&szlig;e eines Feldes erst sp&auml;ter zur Laufzeit des Programmes bekannt. Da es nicht sehr effizient ist, immer den gr&ouml;&szlig;tm&ouml;glichen Speicher zu reservieren, gibt es die <strong>dynamische Speicherverwaltung</strong>.</p><p>Hier nochmal die Deklaration eines Feldes <strong>array1</strong> mit fixer Gr&ouml;&szlig;e, das exakt 100 Integer-Werte speichern kann. Darunter sehen wir den Versuch ein Feld <strong>array2</strong> zu erstellen und die Gr&ouml;&szlig;e von einer Variable <strong>size</strong> abh&auml;ngig zu machen. Prinzipiell muss der Wert f&uuml;r die Gr&ouml;&szlig;e bei der Deklaration eines Feldes fest und unver&auml;nderbar sein. Deshalb kann die Gr&ouml;&szlig;e eigentlich nicht durch eine Variable bestimmt werden. Es gibt aber mittlerweile schlaue Compiler, die das erlauben, sogar wenn <strong>size</strong> durch eine Benutzereingabe zur Laufzeit gesetzt wird. <strong>Es wird aber absolut davon abgeraten, diese Variante zu w&auml;hlen, da das Programm sonst m&ouml;glicherweise nicht auf anderen Systemen l&auml;uft.</strong></p>
+</div>
+
+
+<a name="441"></a>
+<div class="code">
+<pre>
+int array1[100];
+
+// kein Standard:
+int size = 200;
+int array2[size];
+</pre>
+</div>
+
+
+<a name="449"></a>
+<div class="exText">
+<h4>Dynamische Speicherverwaltung</h4>
+<p>F&uuml;r die folgenden Funktionen zur dynamischen Speicherreservierung wird eine neue Bibliothek <strong>stdlib.h</strong> ben&ouml;tigt. Zudem sehen wir einen neuen Datentyp <strong>size_t</strong>. Dieser ist vom Typ <strong>long int</strong> und wird f&uuml;r die Angabe einer Datengr&ouml;&szlig;e in Byte verwendet. Die Funktion <strong>sizeof</strong> liefert bei &Uuml;bergabe eines Datentyps wie <strong>int</strong> dessen ben&ouml;tigte Speichergr&ouml;&szlig;e in Byte. Der Datentyp des R&uuml;ckgabewertes ist <strong>size_t</strong>.</p>
+</div>
+
+
+<a name="442"></a>
+<div class="exText">
+<h4>Speicher reservieren mit malloc</h4>
+<p>Mit <strong>Memory Allocation</strong> reservieren wir zur Laufzeit des Programms auf sichere Art Speicherplatz, z.B. f&uuml;r Felder. Mit dem Parameter <strong>size</strong> wird die Gr&ouml;&szlig;e des Speicherbedarfs in Byte &uuml;bergeben. Der R&uuml;ckgabewert ist ein <strong>void</strong>-Zeiger auf den Anfang des Speicherbereichs oder ein <strong>NULL</strong>-Zeiger, wenn kein freier Speicher mehr zur Verf&uuml;gung steht. Der <strong>void</strong>-Zeiger soll aussagen, dass der Datentyp des belegten Speicherbereichs unbekannt ist.</p>
+</div>
+
+
+<a name="443"></a>
+
+<div class="function"><p>void *malloc(size_t size);</p></div>
+
+<a name="446"></a>
+<div class="exText">
+<p>In diesem Beispielprogramm hat der Benutzer durch eine Tastatureingabe die M&ouml;glichkeit, die Array-Gr&ouml;&szlig;e zu bestimmen. Mit <strong>sizeof(int)</strong> erhalten wir die ben&ouml;tigte Gr&ouml;&szlig;e zur Speicherung eines Integer-Wertes. Die Gesamtgr&ouml;&szlig;e ist abh&auml;ngig von der Anzahl der Elemente, also wird die Einzelgr&ouml;&szlig;e noch mit der gew&uuml;nschten Anzahl multipliziert. Da <strong>malloc</strong> einen <strong>void</strong>-Zeiger liefert, wir in diesem Fall aber einen <strong>int</strong>-Zeiger haben, <a href="tutorial-variablen-typumwandlung.html">casten</a> wir die R&uuml;ckgabe mit <strong>(int *)</strong>. Das Casten ist nicht unbedingt notwendig, da der <strong>void</strong>-Zeiger automatisch in den richtigen Typ transformiert wird. Es ist jedoch sauberer und erleichtert die Arbeit, wenn man den Code sp&auml;ter in C++ Projekten verwenden m&ouml;chte.</p>
+</div>
+
+
+<a name="444"></a>
+<div class="code">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+int main() {
+	int size=0;
+	int *array;
+
+	printf(&quot;Array-Groesse eingeben: &quot;);
+	scanf(&quot;%d&quot;, &amp;size);
+
+	// Speicher reservieren
+	array = (int *) malloc(size * sizeof(int));
+
+	if(array != NULL) {
+		printf(&quot;\nSpeicher ist reserviert\n&quot;);
+	}else {
+		printf(&quot;\nKein freier Speicher vorhanden.\n&quot;);
+	}
+
+	return 0;
+}
+</pre>
+</div>
+
+
+<a name="690"></a>
+<div class="screen">
+<pre>
+Array-Groesse eingeben: 100
+
+Speicher ist reserviert
+</pre>
+</div>
+
+
+<a name="447"></a>
+<div class="exText">
+<h4>Speicher reservieren mit calloc</h4>
+<p>Mit <strong>Cleared Memory Allocation</strong> wird ebenfalls Speicher reserviert, allerdings nicht nach Bytes, sondern nach Elementen. Der erste Parameter bestimmt die Anzahl der Elemente, der zweite die Gr&ouml;&szlig;e eines Elementes. Im Prinzip kein gro&szlig;er Unterschied zu <strong>malloc,</strong> nur dass <strong>calloc</strong> alle Speicherstellen mit 0 initialisiert. <strong>malloc</strong> l&auml;sst den Speicherinhalt unver&auml;ndert. Die R&uuml;ckgabewerte sind identisch zu <strong>malloc</strong>.</p>
+</div>
+
+
+<a name="448"></a>
+
+<div class="function"><p>void *calloc(size_t n, size_t size);</p></div>
+
+<a name="450"></a>
+<div class="exText">
+<p>Zu unserem obigen <strong>malloc</strong> Beispielprogramm &auml;ndert sich nur eine Zeile:</p>
+</div>
+
+
+<a name="451"></a>
+<div class="code">
+<pre>
+array = (int *) calloc(size, sizeof(int));
+</pre>
+</div>
+
+
+<a name="452"></a>
+<div class="exText">
+<h4>Speicher freigeben mit free</h4>
+<p>Wenn Speicher reserviert wurde, sollte er tunlichst auch wieder freigegeben werden, sobald er nicht mehr ben&ouml;tigt wird. Wird regelm&auml;&szlig;ig Speicher reserviert, ohne ihn wieder freizugeben, bringt man eventuell die Kapazit&auml;ten zum Ersch&ouml;pfen. Ist dadurch der Speicher komplett belegt, werden die Daten auf die Festplatte ausgelagert, was viel Zeit in Anspruch nimmt. </p>
+<ul>
+<li><strong>free</strong> kann nur Speicher freigeben, welcher mit <strong>malloc</strong> oder <strong>calloc</strong> reserviert wurde</li>
+<li><strong>free</strong> kann nur Speicher freigeben, welcher vorher noch nicht freigegeben wurde</li></ul>
+
+</div>
+
+
+<a name="453"></a>
+<div class="code">
+<pre>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+int main() {
+	int size=100;
+	int *array;
+	
+	// Speicher reservieren
+	array = (int *) calloc(size, sizeof(int));
+
+	// Speicher freigeben
+	free(array);
+	
+	return 0;
+}
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-arrays-felder-zeigerarithmetik-mehrdimensional.html" title="">Mehrdimensional</a></div>
+	<div class="nextLink"><a href="tutorial-arrays-felder-uebungen.html" title="">&Uuml;bungen</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-schleifen.html">Schleifen</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-initialisierung.html">Initialisierung</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-zweidimensional.html">Zweidimensionale Felder</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-mehrdimensional.html">Mehrdimensionale Felder</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-zeigerarithmetik.html">Zeigerarithmetik</a></li>
+<li class="level3a"><a href="tutorial-arrays-felder-speicherverwaltung.html">Speicherverwaltung</a></li>
+<li class="level3"><a href="tutorial-arrays-felder-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

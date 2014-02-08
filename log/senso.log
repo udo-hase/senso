@@ -1,0 +1,46 @@
+Sat Feb  8 22:13:36 2014: Messdatenerfassung
+Sat Feb  8 22:13:36 2014: Ablauf:
+Sat Feb  8 22:13:36 2014: 	-GPS Standorterfassung
+Sat Feb  8 22:13:36 2014: 	-Erfassung Nummer Messglass
+Sat Feb  8 22:13:36 2014: 	-warte auf Taste und lese dann Temperatursensor
+Sat Feb  8 22:13:36 2014: ----------------------------------------------------
+Sat Feb  8 22:13:36 2014: lese GPS-Standortdaten
+Sat Feb  8 22:13:36 2014: GPS erfolgreich ausgelesen:
+Sat Feb  8 22:13:36 2014: GPS Standort:
+Sat Feb  8 22:13:36 2014: 	-Vendor:	$GPGSV
+Sat Feb  8 22:13:36 2014: 	-Latitude:	3723.2475
+Sat Feb  8 22:13:36 2014: 	-North:		N
+Sat Feb  8 22:13:36 2014: 	-Longitude:	12158.3416
+Sat Feb  8 22:13:36 2014: 	-West:		W
+Sat Feb  8 22:13:36 2014: 	-UTC:		161229.487
+Sat Feb  8 22:13:36 2014: 	-valid Data:	A
+Sat Feb  8 22:13:36 2014: lese RFID Sensor aus
+Sat Feb  8 22:13:36 2014: RFID erfolgreich ausgelesen:
+Sat Feb  8 22:13:36 2014: RFID Nummer: 815
+Sat Feb  8 22:13:36 2014: warte auf Taste.....
+Sat Feb  8 22:13:40 2014: lese Temperatursensor aus..
+Sat Feb  8 22:13:40 2014: Temperatur erfolgreich ausgelesen:
+Sat Feb  8 22:13:40 2014: Temperatur: 20°C
+Sat Feb  8 22:13:57 2014: Messdatenerfassung
+Sat Feb  8 22:13:57 2014: Ablauf:
+Sat Feb  8 22:13:57 2014: 	-GPS Standorterfassung
+Sat Feb  8 22:13:57 2014: 	-Erfassung Nummer Messglass
+Sat Feb  8 22:13:57 2014: 	-warte auf Taste und lese dann Temperatursensor
+Sat Feb  8 22:13:57 2014: ----------------------------------------------------
+Sat Feb  8 22:13:57 2014: lese GPS-Standortdaten
+Sat Feb  8 22:13:57 2014: GPS erfolgreich ausgelesen:
+Sat Feb  8 22:13:57 2014: GPS Standort:
+Sat Feb  8 22:13:57 2014: 	-Vendor:	$GPGSV
+Sat Feb  8 22:13:57 2014: 	-Latitude:	3723.2475
+Sat Feb  8 22:13:57 2014: 	-North:		N
+Sat Feb  8 22:13:57 2014: 	-Longitude:	12158.3416
+Sat Feb  8 22:13:57 2014: 	-West:		W
+Sat Feb  8 22:13:57 2014: 	-UTC:		161229.487
+Sat Feb  8 22:13:57 2014: 	-valid Data:	A
+Sat Feb  8 22:13:57 2014: lese RFID Sensor aus
+Sat Feb  8 22:13:57 2014: RFID erfolgreich ausgelesen:
+Sat Feb  8 22:13:57 2014: RFID Nummer: 815
+Sat Feb  8 22:13:57 2014: warte auf Taste.....
+Sat Feb  8 22:14:00 2014: lese Temperatursensor aus..
+Sat Feb  8 22:14:00 2014: Temperatur erfolgreich ausgelesen:
+Sat Feb  8 22:14:00 2014: Temperatur: 20°C

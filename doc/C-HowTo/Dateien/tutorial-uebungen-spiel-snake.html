@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Spiel Snake Programmieren in C HowTo</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-uebungen-spiel-snake.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-uebungen-arrays-loesung-matrix-addition.html" title="">L&ouml;sung Matrix-Addition</a></div>
+	<div class="nextLink"><a href="tutorial-uebungen-spiel-snake-vorlage.html" title="">Vorlage</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>&Uuml;bungen</h2>
+<h3>Spiel Snake</h3></div>
+<div id="content">
+
+
+<a name="866"></a>
+<p>In dieser Aufgabe soll das bekannte Spiel Snake entwickelt werden. Wir wollen dies in der Konsole mit Textausgaben ohne weitere grafische Mittel realisieren. Die Schlange kann mit Sternchen gezeichnet werden, wobei der Kopf ein gro&szlig;es <strong>O</strong> ist. Im ersten Schritt soll die Schlange mit den Tasten W, A, S, D bewegt werden k&ouml;nnen, wobei der Schwanz nicht mitbewegt wird. Die Schlange wird also automatisch l&auml;nger. In der Bildschirm-Ausgabe ist ein Beispiel-Zug zu sehen. Bei Grenz&uuml;berschreitungen landet die Schlange auf der anderen Seite. Das Spielfeld wird mit den Strichen <strong>-</strong> und <strong>|</strong> markiert. Die Taste X beendet das Programm.</p>
+
+<a name="861"></a>
+<div class="screen">
+<pre>
+|------------------------------------------------------------|
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|                      *******************                   |
+|                      *                 *                   |
+|                      *   ***********   *                   |
+|                      *   *         *   *                   |
+|                      *   *         *   *                   |
+|                      *   *   *******   *                   |
+|        O             *   *             *                   |
+|        *             *   *             *                   |
+|        *             *   ***************                   |
+|        *             *                                     |
+|        *             *                                     |
+|*********             **************************************|
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|------------------------------------------------------------|
+</pre>
+</div>
+
+
+<a name="867"></a>
+<p>F&uuml;r die Programmierung des Spiels gibt es eine <a href="tutorial-uebungen-spiel-snake-vorlage.html">Vorlage</a>, die verwendet werden sollte. Normalerweise muss jede Tasteneingabe mit ENTER best&auml;tigt werden, dies w&auml;re bei solch einem Spiel sehr hinderlich. Die &nbsp;<a href="tutorial-uebungen-spiel-snake-vorlage.html">Vorlage</a> enth&auml;lt deshalb schon eine L&ouml;sung f&uuml;r dieses Problem. Vor dem Einlesen der Zeichen sollte die Funktion <strong>tty_break()</strong> aufgerufen werden, dann wird nach einem <strong>getchar()</strong> kein ENTER mehr ben&ouml;tigt. </p><p><strong>Die Programm-Vorlage und Musterl&ouml;sung funktionieren nur unter <a href="tutorial-einfuehrung-compiler-linux.html">Linux</a>. Sie sind nicht kompatibel zu dem hier vorgestellten <a href="tutorial-einfuehrung-compiler-windows.html">Windows-Compiler</a>.</strong> </p><p>Die zu implementierenden Funktion sind in der <a href="tutorial-uebungen-spiel-snake-vorlage.html">Vorlage</a> mit einem Kommentar gekennzeichnet. Konkret sind dies im ersten Schritt diese Funktionen:</p>
+<ul>
+<li>Spielfeld l&ouml;schen</li>
+<li>Spielfeld ausgeben</li>
+<li>Spielfigur setzen (Kopf, Schwanz, Essen)</li>
+<li>Spielfigur bewegen (Tasten W, A, S, D verarbeiten)</li></ul>
+<p>Das Spielfeld wird in einem Integer-Feld gespeichert, wobei eine bestimmte Zahl stellvertretend f&uuml;r eine Spielfigur bzw. Feldzustand ist. Diese Zust&auml;nde werden &uuml;ber symbolische Konstanten organisiert, um die Lesbarkeit des Programms zu erh&ouml;hen. Hier die Feldzust&auml;nde:</p>
+<ul>
+<li>BLANK 0, Feld ist leer</li>
+<li>HEAD 1, Kopf der Schlange</li>
+<li>TAIL 2, Schwanz der Schlange</li>
+<li>FOOD 9, Essen f&uuml;r die Schlange (im ersten Schritt nicht relevant)</li></ul>
+<p>Gleiches gilt f&uuml;r die Tasten zum Bewegen der Schlange. Hier werden die ASCII-Codes der Steuerungs-Tasten gespeichert:</p>
+<ul>
+<li>KEY_MOVE_UP 119, Taste W</li>
+<li>KEY_MOVE_LEFT 97, Taste A</li>
+<li>KEY_MOVE_DOWN 115, Taste S</li>
+<li>KEY_MOVE_RIGHT 100, Taste D</li></ul>
+<p>Die Feldgr&ouml;&szlig;e wird ebenfalls &uuml;ber Konstanten definiert. Dies erm&ouml;glicht eine einfache Ver&auml;nderung der Spielfeldgr&ouml;&szlig;e.</p>
+<ul>
+<li>WIDTH 60</li>
+<li>HEIGHT 20</li></ul>
+<p>&Uuml;ber die globalen Variablen <strong>field</strong> und <strong>pos</strong> wird das Spielfeld und die Position des Schlangenkopfes gespeichert. Da das Feld global definiert ist, ist darauf ein einfacher Zugriff von allen Funktionen aus m&ouml;glich. Mit dem Programmieren kann nun begonnen werden. In der <a href="tutorial-uebungen-spiel-snake-vorlage.html">Vorlage</a> ist lediglich das Beenden des Programms mit X implementiert.</p>
+
+<a name="868"></a>
+<div class="exTextBoth">
+<h4>Erweiterungen</h4>
+<p>Hat man die Grundversion des Spiels programmiert, gibt es noch viele M&ouml;glichkeiten das Spiel zu erweitern.</p>
+<ul>
+<li>Schwanz: Bisher bleibt der Schwanz unver&auml;ndert. In einer Erweiterung kann der Schwanz mit der Schlange bewegt werden, sodass diese sich nicht automatisch verl&auml;ngert.</li>
+<li>&Uuml;berlappungen: Bisher kann die Schlange sich selbst &uuml;berlappen. Im normalen Snake-Spiel darf sich die Schlange nicht selbst ber&uuml;hren.</li>
+<li>Essen: Mit der symbolischen Konstante <strong>FOOD</strong> kann Essen auf dem Spielfeld verteilt werden, welches die Schlange einsammeln bzw. essen kann. Die Schlange wird dadurch l&auml;nger.</li></ul>
+
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-uebungen-arrays-loesung-matrix-addition.html" title="">L&ouml;sung Matrix-Addition</a></div>
+	<div class="nextLink"><a href="tutorial-uebungen-spiel-snake-vorlage.html" title="">Vorlage</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level3"><a href="tutorial-uebungen-teil1.html">Teil 1</a></li>
+<li class="level3"><a href="tutorial-uebungen-teil2.html">Teil 2</a></li>
+<li class="level3"><a href="tutorial-uebungen-arrays.html">Arrays</a></li>
+<li class="level3a"><a href="tutorial-uebungen-spiel-snake.html">Spiel Snake</a></li>
+<li class="level4"><a href="tutorial-uebungen-spiel-snake-vorlage.html">Vorlage</a></li>
+<li class="level4"><a href="tutorial-uebungen-spiel-snake-loesung-teil1.html">L&ouml;sung Teil 1</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

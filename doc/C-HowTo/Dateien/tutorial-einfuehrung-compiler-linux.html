@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Kompilieren unter Linux Programmieren in C</title>
+<meta name="description" content="Eine Erkl&auml;rung zu &quot;Wie kompiliert man C Code mit gcc unter Linux zu einem ausf&uuml;hrbaren Programm.&quot;" />
+<meta name="keywords" content="compiler, Kompilieren, Erkl&auml;rung, Programm, gcc, Linux, ausf&uuml;hrbar" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-einfuehrung-compiler-linux.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-compiler.html" title="">Compiler</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-compiler-windows.html" title="Kompilieren unter Windows in C">Windows</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Einf&uuml;hrung</h2>
+<h3>Compiler</h3>
+<h4>Kompilieren unter Linux Programmieren in C</h4></div>
+<div id="content">
+
+
+<a name="26"></a>
+<div class="exText">
+<p>Wenn wir ein fertiges Quellprogramm haben, ist es ein Leichtes dieses unter Linux zu kompilieren. Man ben&ouml;tigt ein Terminalfenster (Shell) und wechselt in das Verzeichnis, in dem das C-Script liegt. Nehmen wir an, es hei&szlig;t &quot;hello.c&quot;, so geben wir folgendes ein:</p>
+</div>
+
+
+<a name="27"></a>
+<div class="screen">
+<pre>
+# gcc hello.c
+</pre>
+</div>
+
+
+<a name="28"></a>
+<div class="exText">
+<p>Danach sollte bei erfolgreicher Komiplierung eine neue Datei namens &quot;<strong>a.out</strong>&quot; im gleichen Verzeichnis liegen. Das ist nun unsere Bin&auml;rdatei, welche wir ausf&uuml;hren k&ouml;nnen. Dies geht mit:</p>
+</div>
+
+
+<a name="29"></a>
+<div class="screen">
+<pre>
+# ./a.out
+</pre>
+</div>
+
+
+<a name="30"></a>
+<div class="exText">
+<p>H&auml;tte man jetzt unser &quot;<a href="tutorial-einfuehrung-hello-world.html">Hello World</a>&quot;-Programm kompiliert und ausgef&uuml;hrt, w&uuml;rde der Text &quot;Hello World&quot; am Bildschirm erscheinen.</p><p>Beim Kompilieren kann man auch direkt einen Namen f&uuml;r die Ausgabedatei festlegen, sodass diese nicht immer &quot;a.out&quot; hei&szlig;t. Hier w&uuml;rde die Ausgabedatei &quot;hello&quot; hei&szlig;en:</p>
+</div>
+
+
+<a name="31"></a>
+<div class="screen">
+<pre>
+# gcc hello.c -o hello
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-compiler.html" title="">Compiler</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-compiler-windows.html" title="Kompilieren unter Windows in C">Windows</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programmieren.html">Programmieren</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programm.html">Programm?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-c.html">Warum C?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hello-world.html">Hello World</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-anfang.html">Der Anfang</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-compiler.html">Compiler</a></li>
+<li class="level4a"><a href="tutorial-einfuehrung-compiler-linux.html">Linux</a></li>
+<li class="level4"><a href="tutorial-einfuehrung-compiler-windows.html">Windows</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-kommentare.html">Kommentare</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-binaersystem.html">Bin&auml;rsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hexadezimalsystem.html">Hexadezimalsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-bits-bytes.html">Bits und Bytes</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

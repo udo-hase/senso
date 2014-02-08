@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Operatoren Programmieren in C HowTo</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-variablen-operatoren.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-variablen-namensgebung.html" title="">Namensgebung</a></div>
+	<div class="nextLink"><a href="tutorial-variablen-bitmanipulation.html" title="">Bitmanipulation</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Variablen</h2>
+<h3>Operatoren</h3></div>
+<div id="content">
+
+
+<a name="78"></a>
+<div class="exText">
+<h4>Zuweisung</h4>
+<p>Den einfachsten Operator <strong>=</strong> haben wir bereits aus den bisherigen Beispielen kennengelernt, er setzt eine Variable auf einen bestimmten Wert. Auf der linken Seite von <strong>=</strong> muss also eine Variable stehen, auf der rechten Seite ein Ausdruck, z.B. ein konstanter Wert, eine Formel, oder eine Variable.</p>
+</div>
+
+
+<a name="79"></a>
+<div class="code">
+<pre>
+int a, b;
+
+// Zuweisung eines konstanten Wertes, a ist 1
+a = 1;
+
+// Zuweisung eines Variablenwertes, b ist 1
+b = a;
+</pre>
+</div>
+
+
+<a name="77"></a>
+<div class="exText">
+<h4>Inkrement &amp; Dekrement</h4>
+<p>Wollen wir den Wert einer Variablen um eins erh&ouml;hen oder erniedrigen, empfiehlt es sich die Inkrement- und Dekrement-Operatoren zu nutzen. Im folgendem Beispiel erledigen wir das Inkrementieren und Dekrementieren mit und ohne Inkrement- und Dekrement-Operatoren, um den praktischen Vorteil zu erkennen.</p>
+</div>
+
+
+<a name="80"></a>
+<div class="code">
+<pre>
+int a=0, b=0;
+
+// a mit Inkrement-Operator hochz&auml;hlen
+a++;
+
+// b ohne Inkrement-Operator hochz&auml;hlen
+b = b + 1;
+
+// a dekrementieren, a ist wieder 0
+a--;
+
+// b ohne Inkrement-Operator dekrementieren
+b = b - 1;
+</pre>
+</div>
+
+
+<a name="81"></a>
+<div class="exText">
+<p>Bei der Zuweisung gibt es mit <strong>++</strong> und <strong>--</strong> noch eine Besonderheit:</p>
+</div>
+
+
+<a name="82"></a>
+<div class="code">
+<pre>
+int a,  b=0;
+
+// Erst Zuweisung, dann Inkrement, a ist 0, b ist 1
+a = b++;
+
+// Erst Inkrement, dann Zuweisung, a ist 1, b ist 1
+a = ++b;
+</pre>
+</div>
+
+
+<a name="83"></a>
+<div class="exText">
+<h4>Rechenoperatoren</h4>
+<p>F&uuml;r das Rechnen stehen uns die folgenden bekannten Operatoren zur Verf&uuml;gung:</p>
+<ul>
+<li>Addition: <strong>+</strong></li>
+<li>Subtraktion: <strong>-</strong></li>
+<li>Multiplikation: <strong>*</strong></li>
+<li>Division: <strong>/</strong></li>
+<li>Modulo (Rest): <strong>%</strong></li></ul>
+<p>Wenden wir die Multiplikation und Division auf <strong>int</strong> Variablen an, welche bekanntlich nur ganze Zahlen speichern k&ouml;nnen, wird automatisch gerundet. Der Nachkommateil wird hierbei einfach weggeschnitten, d.h. aus 2.1, 2.5 und 2.9 wird einfach 2.</p>
+</div>
+
+
+<a name="84"></a>
+<div class="code">
+<pre>
+int a=0, b=2, c=5;
+
+a = b + c;  // a ist 7
+a = b - c;  // a ist -3
+a = c / b;  // a ist 2
+a = c * b;  // a ist 10
+
+// Rest aus Division berechnen
+a = c % b;  // 5 / 2 ist 2 Rest 1, a ist 1
+a = c % 3;  // 5 / 3 ist 1 Rest 2, a ist 2
+
+// Priorit&auml;ten mit Klammern setzen
+a = 1 + b * c;    // Punkt vor Strich, a ist 11
+a = (1 + b) * c;  // 1+2 ist 3, 3*5 ist 15, a ist 15
+</pre>
+</div>
+
+
+<a name="85"></a>
+<div class="exText">
+<p>M&ouml;chte man den bisherigen Wert der Zielvariable mit verwenden, so kann man auch eine Kurzschreibweise f&uuml;r alle Rechenoperatoren verwenden. Hierf&uuml;r wird der Operator vor die Zuweisung gesetzt.</p>
+</div>
+
+
+<a name="86"></a>
+<div class="code">
+<pre>
+int a=1, b=2;
+
+a += 1;      // wie a=a+1 oder a++, a ist 2
+a += b * 4;  // a ist 10
+a /= 2;      // a ist 5
+a %= 2;      // a ist 1
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-variablen-namensgebung.html" title="">Namensgebung</a></div>
+	<div class="nextLink"><a href="tutorial-variablen-bitmanipulation.html" title="">Bitmanipulation</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level3"><a href="tutorial-variablen-datentypen.html">Datentypen</a></li>
+<li class="level3"><a href="tutorial-variablen-deklaration.html">Deklaration &amp; Co</a></li>
+<li class="level3"><a href="tutorial-variablen-namensgebung.html">Namensgebung</a></li>
+<li class="level3a"><a href="tutorial-variablen-operatoren.html">Operatoren</a></li>
+<li class="level3"><a href="tutorial-variablen-bitmanipulation.html">Bitmanipulation</a></li>
+<li class="level3"><a href="tutorial-variablen-typumwandlung.html">Typumwandlung</a></li>
+<li class="level3"><a href="tutorial-variablen-uebung.html">&Uuml;bung</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+g++ -lrt -lpthread senso.c  -o senso -I ../include -L ../lib
+

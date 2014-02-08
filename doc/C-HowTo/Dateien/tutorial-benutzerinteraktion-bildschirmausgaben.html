@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Bildschirmausgaben Programmieren in C HowTo</title>
+<meta name="description" content="Die Programmierung von Bildschirmausgaben in C mit printf (print file)." />
+<meta name="keywords" content="printf, Programmierung, c, Bildschirmausgaben" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-benutzerinteraktion-bildschirmausgaben.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-benutzerinteraktion.html" title="">Benutzerinteraktion</a></div>
+	<div class="nextLink"><a href="tutorial-benutzerinteraktion-tastatureingaben.html" title="">Tastatureingaben</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Benutzerinteraktion</h2>
+<h3>Bildschirmausgaben</h3></div>
+<div id="content">
+
+
+<a name="87"></a>
+<div class="exText">
+<p>In den vergangenen Beispielen haben wir bereits den <strong>printf</strong> Befehl f&uuml;r die Ausgabe von Informationen auf dem Bildschirm kennengelernt. Hier lernen wir nun, wie dieser im Detail funktioniert.</p>
+</div>
+
+
+<a name="88"></a>
+<div class="code">
+<pre>
+printf(&quot;Hello World&quot;);
+</pre>
+</div>
+
+
+<a name="658"></a>
+<div class="screen">
+<pre>
+Hello World
+</pre>
+</div>
+
+
+<a name="89"></a>
+<div class="exText">
+<p>Der Text zwischen den Hochkommas wird also auf dem Bildschirm ausgegeben. Dieser kann mit Tabulatoren und Zeilenumbr&uuml;chen formatiert werden. Diese werden wiederum mit sogenannten Escape-Sequenzen realisiert. Escape-Sequenzen erkennt man an dem Backslash <strong>\</strong>. Damit werden besondere Zeichen markiert.</p>
+</div>
+
+
+<a name="90"></a>
+<div class="code">
+<pre>
+printf(&quot;\nZeile\tEins&quot;);
+printf(&quot;\nZeile\tZwei&quot;);
+printf(&quot;\nZeile\tDrei\n\tEnde&quot;);
+</pre>
+</div>
+
+
+<a name="91"></a>
+<div class="screen">
+<pre>
+Zeile   Eins
+Zeile   Zwei
+Zeile   Drei
+        Ende
+</pre>
+</div>
+
+
+<a name="111"></a>
+<div class="exText">
+<h4>Ausgabe von Variablen</h4>
+<p>Wollen wir in den auszugebenden Text Variablenwerte einf&uuml;gen, geht dies mit der Formatierungsanweisung <strong>%</strong>. F&uuml;r jeden Datentyp gibt es einen eigenen Formatierungstyp. Die Formatierungsanweisung wird in den Text geschrieben, also zwischen die Hochkommas. Nach den Hochkommas folgen die Variablennamen mit Komma getrennt. Die Anzahl der Formatierungsanweisungen und Variablennamen muss gleich sein und die Datentypen m&uuml;ssen zusammenpassen.</p>
+</div>
+
+
+<a name="92"></a>
+<div class="exText">
+<h4>Ausgabe von Zeichen</h4>
+<p>F&uuml;r die Ausgabe eines einzelnen Zeichens verwenden wir den Formatierungstyp <strong>%c</strong>.</p>
+</div>
+
+
+<a name="94"></a>
+<div class="code">
+<pre>
+char alphabetEnde = &#039;X&#039;;
+
+printf(&quot;Das Alphabet endet mit: %c\n&quot;, alphabetEnde);
+</pre>
+</div>
+
+
+<a name="659"></a>
+<div class="screen">
+<pre>
+Das Alphabet endet mit: X
+</pre>
+</div>
+
+
+<a name="95"></a>
+<div class="exText">
+<h4>Ausgabe von ganzen Zahlen</h4>
+<p>Der Formatierungstyp f&uuml;r ganze Zahlen ist <strong>%d</strong>. In dem ersten <strong>printf</strong> Befehl im folgenden Beispiel geben wir zwei Zahlen ganz normal aus. Bei der zweiten Ausgabe jedoch steht zwischen <strong>%</strong> und <strong>d</strong> eine Zahl. Diese sagt, auf welche L&auml;nge der auszugebende Wert gebracht werden soll. Ist der Wert in diesem Beispiel k&uuml;rzer als 10 Zeichen, so wird er mit Leerzeichen aufgef&uuml;llt, bis er die L&auml;nge von 10 Zeichen hat - was in dem Fall wesentlich besser aussieht.</p>
+</div>
+
+
+<a name="96"></a>
+<div class="code">
+<pre>
+int laenge=312500, breite=50;
+printf(&quot;\nLaenge: %d cm\nBreite: %d cm\n&quot;, laenge, breite);
+printf(&quot;\nLaenge: %10d cm\nBreite: %10d cm\n&quot;, laenge, breite);
+</pre>
+</div>
+
+
+<a name="97"></a>
+<div class="screen">
+<pre>
+Laenge: 312500 cm
+Breite: 50 cm
+
+Laenge:     312500 cm
+Breite:         50 cm
+</pre>
+</div>
+
+
+<a name="98"></a>
+<div class="exText">
+<h4>Ausgabe von Kommazahlen</h4>
+<p>Zur Ausgabe von Kommazahlen verwenden wir den Formatierungstyp <strong>%f</strong>. So wie man den Vorkommateil auf eine bestimmte L&auml;nge bringen kann, kann man dies auch mit dem Nachkommeteil machen. Mit <strong>%2.3f</strong> hat man z.B. 2 Vorkommastellen und 3 Nachkommastellen. Was zu wenig ist, wird aufgef&uuml;llt - was zu viel ist, wird abgeschnitten.</p>
+</div>
+
+
+<a name="99"></a>
+<div class="code">
+<pre>
+float laenge=312.5789, breite=5.6;
+printf(&quot;\nLaenge: %f cm\nBreite: %f cm\n&quot;, laenge, breite);
+printf(&quot;\nLaenge: %10.2f cm\nBreite: %10.2f cm\n&quot;, laenge, breite);
+</pre>
+</div>
+
+
+<a name="100"></a>
+<div class="screen">
+<pre>
+Laenge: 312.578888 cm
+Breite: 5.600000 cm
+
+Laenge:     312.58 cm
+Breite:       5.60 cm
+</pre>
+</div>
+
+
+<a name="110"></a>
+<div class="exText">
+<h4>Weitere Formatierungen</h4>
+<p>Sollen beim Auff&uuml;llen keine Leerzeichen, sondern f&uuml;hrende Nullen verwendet werden, erreichen wir dies mit einer Null nach <strong>%</strong>, also <strong>%0</strong>. In diesem Beispiel sind die Variablenwerte tag und monat einstellig, zweistellig wird es mit einer f&uuml;hrenden Null.</p>
+</div>
+
+
+<a name="108"></a>
+<div class="code">
+<pre>
+int tag=3, monat=9, jahr=2007;
+printf(&quot;Ein Datum: %02d.%02d.%4d\n&quot;, tag, monat, jahr);
+</pre>
+</div>
+
+
+<a name="109"></a>
+<div class="screen">
+<pre>
+Ein Datum: 03.09.2007
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-benutzerinteraktion.html" title="">Benutzerinteraktion</a></div>
+	<div class="nextLink"><a href="tutorial-benutzerinteraktion-tastatureingaben.html" title="">Tastatureingaben</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level3a"><a href="tutorial-benutzerinteraktion-bildschirmausgaben.html">Bildschirmausgaben</a></li>
+<li class="level3"><a href="tutorial-benutzerinteraktion-tastatureingaben.html">Tastatureingaben</a></li>
+<li class="level3"><a href="tutorial-benutzerinteraktion-uebung.html">&Uuml;bung</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

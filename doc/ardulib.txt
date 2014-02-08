@@ -1,0 +1,3 @@
+ardulib mit folgendem Kommando übersetzen:
+g++ -c arduPi.cpp -o arduPi.o -fpermissive
+-- -permissive schaltet den Error bei Typumwandlung auf Warning!!

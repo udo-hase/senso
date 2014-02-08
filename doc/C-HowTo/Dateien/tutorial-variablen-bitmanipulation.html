@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Bitmanipulation Programmieren in C HowTo</title>
+<meta name="description" content="Bitmanipulation von Variablen und Werte in der Programmierung. Und, Exklusiv, Oder, Verschiebung sind einige M&ouml;glichkeiten der Bitmanipulationen." />
+<meta name="keywords" content="bit, manipulation, Und, Exklusiv, Oder, Verschiebung, and, xor, or, nor" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-variablen-bitmanipulation.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-variablen-operatoren.html" title="">Operatoren</a></div>
+	<div class="nextLink"><a href="tutorial-variablen-typumwandlung.html" title="">Typumwandlung</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Variablen</h2>
+<h3>Bitmanipulation</h3></div>
+<div id="content">
+
+
+<a name="764"></a>
+<div class="exText">
+<p>In diesem Teil werden wir nicht mit den Zahlen an sich arbeiten, sondern mit den <a href="tutorial-einfuehrung-binaersystem.html">Bin&auml;rwerten</a>, welche die Zahlen im Speicher repr&auml;sentieren. Im Folgenden werden also Operatoren vorgestellt, welche Bitwerte verkn&uuml;pfen.</p>
+</div>
+
+
+<a name="765"></a>
+<div class="exText">
+<h4>AND - UND Verkn&uuml;pfung</h4>
+<p>Bei der bitweisen <strong>UND</strong>-Verkn&uuml;pfung hat das Ergebnis an den Stellen eine <strong>1</strong>, an denen beide Vergleichswerte eine <strong>1</strong> besitzen. Das Operatorzeichen daf&uuml;r ist das einfache Kaufmanns-Und <strong>&amp;</strong>.</p><p>Hier werden die Zahlen 10 und 7 <strong>UND</strong> verkn&uuml;pft. Unter der Bildschirmausgabe ist die Rechnung zu sehen, welche dieser Operator macht.</p>
+</div>
+
+
+<a name="766"></a>
+<div class="code">
+<pre>
+int a=10, b=7, c;
+c = a &amp; b;
+printf(&quot;c: %d\n&quot;, c);
+</pre>
+</div>
+
+
+<a name="767"></a>
+<div class="screen">
+<pre>
+c: 2
+</pre>
+</div>
+
+
+<a name="768"></a>
+<div class="code">
+<pre>
+Zugeh&ouml;rige Rechnung der UND-Verkn&uuml;pfung
+
+a: 10 dez =&gt; 1010 bin&auml;r
+b:  7 dez =&gt; 0111 bin&auml;r
+
+      1010
+ UND  0111
+-----------
+      0010 
+
+c: 10 bin&auml;r =&gt; 2 dezimal
+</pre>
+</div>
+
+
+<a name="769"></a>
+<div class="exText">
+<h4>OR - ODER Verkn&uuml;pfung</h4>
+<p>Bei der bitweisen <strong>ODER</strong>-Verkn&uuml;pfung hat das Ergebnis an den Stellen eine <strong>1</strong>, an denen mindestens <strong>einer</strong> der beiden Vergleichswerte eine <strong>1</strong> besitzt. Das Operatorzeichen daf&uuml;r ist das einfache Pipe-Zeichen <strong>|</strong>.</p>
+</div>
+
+
+<a name="770"></a>
+<div class="code">
+<pre>
+int a=10, b=6, c;
+c = a | b;
+printf(&quot;c: %d\n&quot;, c);
+</pre>
+</div>
+
+
+<a name="771"></a>
+<div class="screen">
+<pre>
+c: 14
+</pre>
+</div>
+
+
+<a name="772"></a>
+<div class="code">
+<pre>
+Zugeh&ouml;rige Rechnung der ODER-Verkn&uuml;pfung
+
+a: 10 dez =&gt; 1010 bin&auml;r
+b:  6 dez =&gt; 0110 bin&auml;r
+
+      1010
+ OR   0110
+-----------
+      1110 
+
+c: 1110 bin&auml;r =&gt; 14 dezimal
+</pre>
+</div>
+
+
+<a name="773"></a>
+<div class="exText">
+<h4>XOR - Exklusiv ODER Verkn&uuml;pfung</h4>
+<p>Bei der bitweisen <strong>XOR</strong> Verkn&uuml;pfung hat das Ergebnis an den Stellen eine <strong>1</strong>, an denen <strong>entweder</strong> der eine oder der andere Vergleichswert eine <strong>1</strong> besitzt. Das Operatorzeichen daf&uuml;r ist das Dach-Zeichen <strong>^</strong>.</p>
+</div>
+
+
+<a name="774"></a>
+<div class="code">
+<pre>
+int a=10, b=6, c;
+c = a ^ b;
+printf(&quot;c: %d\n&quot;, c);
+</pre>
+</div>
+
+
+<a name="775"></a>
+<div class="screen">
+<pre>
+c: 12
+</pre>
+</div>
+
+
+<a name="776"></a>
+<div class="code">
+<pre>
+Zugeh&ouml;rige Rechnung der XOR-Verkn&uuml;pfung
+
+      1010
+XOR   0110
+-----------
+      1100 
+
+c: 1100 bin&auml;r =&gt; 12 dezimal
+</pre>
+</div>
+
+
+<a name="777"></a>
+<div class="exText">
+<h4>Negation</h4>
+<p>Bei der bitweisen Negation wird jedes Bit umgekehrt: aus 0 wird 1 und aus 1 wird 0. Das Operator-Zeichen daf&uuml;r ist die Tilde <strong>~</strong>. Der Wert 6 (0110 bin&auml;r) wird zuerst negiert, dies ergibt 1001 bin&auml;r, anschlie&szlig;end erfolgt eine UND-Verkn&uuml;pfung mit 1.</p>
+</div>
+
+
+<a name="778"></a>
+<div class="code">
+<pre>
+int b=6, c;
+c = 1 &amp; ~b;
+printf(&quot;c: %d\n&quot;, c);
+</pre>
+</div>
+
+
+<a name="779"></a>
+<div class="screen">
+<pre>
+c: 1
+</pre>
+</div>
+
+
+<a name="780"></a>
+<div class="exText">
+<h4>Bit-Verschiebung</h4>
+<p>Die Bits eines Wertes k&ouml;nnen nach links oder rechts verschoben werden. Die Bits am Rand fallen somit raus, die Stellen auf der anderen Seite werden mit Nullen aufgef&uuml;llt. Die Linksverschiebung geht mit <strong>&lt;&lt;</strong>, die Rechtsverschiebung mit <strong>&gt;&gt;</strong>.</p><p>Hier wird der Wert 5 jeweils nach links und rechts um eine Stelle verschoben.</p>
+</div>
+
+
+<a name="781"></a>
+<div class="code">
+<pre>
+int b=5, c, d;
+c = b &lt;&lt; 1;
+d = b &gt;&gt; 1;
+printf(&quot;c: %d, d: %d\n&quot;, c, d);
+</pre>
+</div>
+
+
+<a name="782"></a>
+<div class="screen">
+<pre>
+c: 10, d: 2
+</pre>
+</div>
+
+
+<a name="783"></a>
+<div class="code">
+<pre>
+b:      5 dez =&gt; 0101 bin&auml;r
+
+c:  0101 &lt;&lt; 1 =&gt; 1010 bin&auml;r =&gt; 10 dezimal
+d:  0101 &gt;&gt; 1 =&gt; 0010 bin&auml;r =&gt;  2 dezimal
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-variablen-operatoren.html" title="">Operatoren</a></div>
+	<div class="nextLink"><a href="tutorial-variablen-typumwandlung.html" title="">Typumwandlung</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level3"><a href="tutorial-variablen-datentypen.html">Datentypen</a></li>
+<li class="level3"><a href="tutorial-variablen-deklaration.html">Deklaration &amp; Co</a></li>
+<li class="level3"><a href="tutorial-variablen-namensgebung.html">Namensgebung</a></li>
+<li class="level3"><a href="tutorial-variablen-operatoren.html">Operatoren</a></li>
+<li class="level3a"><a href="tutorial-variablen-bitmanipulation.html">Bitmanipulation</a></li>
+<li class="level3"><a href="tutorial-variablen-typumwandlung.html">Typumwandlung</a></li>
+<li class="level3"><a href="tutorial-variablen-uebung.html">&Uuml;bung</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

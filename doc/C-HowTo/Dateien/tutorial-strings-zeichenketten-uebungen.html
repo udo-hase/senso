@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>&Uuml;bungen zu Strings in C</title>
+<meta name="description" content="Programmier&uuml;bungen zu Strings in C mit String To Lower, String Compare, String Remove und String Replace" />
+<meta name="keywords" content="string&uuml;bung" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-strings-zeichenketten-uebungen.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-strings-zeichenketten-typumwandlung.html" title="">Typumwandlung</a></div>
+	<div class="nextLink"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil1-string-to-lower.html" title="">L&ouml;sung Teil 1 - String To Lower</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Strings (Zeichenketten)</h2>
+<h3>&Uuml;bungen zu Strings in C</h3></div>
+<div id="content">
+
+
+<a name="406"></a>
+<div class="exTextBoth">
+<h4>Teil 1 - String To Lower</h4>
+<p>Schreibe eine Funktion, welche ein Zeiger auf einen String (char Array) &uuml;bergeben werden kann. Die Funktion soll alle Gro&szlig;buchstaben in Kleinbuchstaben umwandeln. Implementiert werden soll die Funktion in einer <strong>for</strong> Schleife mit lediglich einem <strong>if</strong>. Ein Blick auf die <a href="tutorial-anhang-ascii-tabelle.html">ASCII-Tabelle</a> ist auch hilfreich. Der R&uuml;ckgabewert ist der Zeiger auf den bearbeiteten String. Dieser muss im Hauptprogramm aber nicht abgefangen werden, da die Funktion den String direkt &uuml;ber Zeiger ver&auml;ndert. Verwende diesen Funktions-Prototyp:</p>
+</div>
+
+
+<a name="407"></a>
+
+<div class="function"><p>char * stringToLower(char *string);</p></div>
+
+<a name="411"></a>
+<div class="exText">
+<p><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil1-string-to-lower.html">L&ouml;sungsvorschlag zu Teil 1 - String To Lower</a></p>
+</div>
+
+
+<a name="415"></a>
+<div class="exTextBoth">
+<h4>Teil 2 - String Compare Differences</h4>
+<p>Schreibe eine Funktion, die zwei Strings miteinander vergleicht. Unterscheiden sich im zweiten String Zeichen an der gleichen Position im ersten String, werden diese in einem Ergebnis-String gespeichert. Das Problem ist mit einer Schleife und einer <strong>if</strong> Anweisung l&ouml;sbar. R&uuml;ckgabewert ist der Zeiger auf den Ergebnis String, also Parameter <strong>result</strong>. Sind die Strings identisch, wird ein Leer-String zur&uuml;ckgegeben. Der Funktions-Prototyp und Beispiel-Ausgabe:</p>
+</div>
+
+
+<a name="416"></a>
+
+<div class="function"><p>char * stringCompareDif(char *string1, char *string2, char *result);</p></div>
+
+<a name="417"></a>
+<div class="screen">
+<pre>
+String 1:       Die schoenen Dinge im Leben sind umsonst.
+String 2:       die Schoenen dinge Im leben Sind Umsonst.
+Unterschiede:   dSdIlSU
+</pre>
+</div>
+
+
+<a name="418"></a>
+<div class="exText">
+<p><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil2-string-compare-differences.html">L&ouml;sungsvorschlag zu Teil 2 - String Compare Differences</a></p>
+</div>
+
+
+<a name="422"></a>
+<div class="exTextBoth">
+<h4>Teil 3 - String Remove Chars</h4>
+<p>Schreibe eine Funktion, die in einem String bestimmte Zeichen entfernt, sprich durch Leerzeichen ersetzt. Der erste Parameter der Funktion ist der zu bearbeitende String. Der zweite Parameter enth&auml;lt die zu entfernenden Zeichen. Dies ist mit <a href="tutorial-strings-zeichenketten-stringfunktionen-suchen-strpbrk.html"><strong>strpbrk</strong></a> und mit einer Schleife zu l&ouml;sen. Um ein besseres Verst&auml;ndnis f&uuml;r die Arbeitsweise dieser Hilfsfunktionen zu erhalten, kann diese Aufgabe auch von Hand ohne strpbrk umgesetzt werden.</p>
+</div>
+
+
+<a name="423"></a>
+
+<div class="function"><p>char * stringRemoveChars(char *string, char *spanset);</p></div>
+
+<a name="425"></a>
+<div class="exText">
+<p>In dieser Beispiel-Ausgabe wurde die zu entwickelnde Funktion verwendet, um Zahlen in einem String zu entfernen.</p>
+</div>
+
+
+<a name="424"></a>
+<div class="screen">
+<pre>
+vorher:         8Die1schoenen4Dinge6im3Leben9sind0umsonst.5
+nachher:         Die schoenen Dinge im Leben sind umsonst.
+</pre>
+</div>
+
+
+<a name="426"></a>
+<div class="exText">
+<p><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil3-string-remove-chars.html">L&ouml;sungsvorschlag zu Teil 3 - String Remove Chars</a></p>
+</div>
+
+
+<a name="430"></a>
+<div class="exTextBoth">
+<h4>Teil 4 - String Replace</h4>
+<p>Es soll eine Funktion geschrieben werden, welche in einem String einen String ersetzt. Der gesuchte String und &nbsp;der Ersetzungs-String k&ouml;nnen hierbei eine unterschiedliche L&auml;nge haben. Daf&uuml;r w&auml;re die Verwendung der <a href="tutorial-arrays-felder-speicherverwaltung.html">dynamischen Speicherverwaltung</a> hilfreich.</p>
+</div>
+
+
+<a name="431"></a>
+
+<div class="function"><p>char * stringReplace(char *search, char *replace, char *string);</p></div>
+
+<a name="432"></a>
+<div class="screen">
+<pre>
+vorher:         Die schoenen Sachen im Leben sind umsonst.
+nachher:        Die schoenen Dinge im Leben sind umsonst.
+</pre>
+</div>
+
+
+<a name="433"></a>
+<div class="exText">
+<p><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil4-string-replace.html">L&ouml;sungsvorschlag zu Teil 4 - String Replace</a></p>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-strings-zeichenketten-typumwandlung.html" title="">Typumwandlung</a></div>
+	<div class="nextLink"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil1-string-to-lower.html" title="">L&ouml;sung Teil 1 - String To Lower</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level3"><a href="tutorial-strings-zeichenketten-nullterminiert.html">Nullterminiert</a></li>
+<li class="level3"><a href="tutorial-strings-zeichenketten-stringfunktionen.html">String-Funktionen</a></li>
+<li class="level3"><a href="tutorial-strings-zeichenketten-typumwandlung.html">Typumwandlung</a></li>
+<li class="level3a"><a href="tutorial-strings-zeichenketten-uebungen.html">&Uuml;bungen</a></li>
+<li class="level4"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil1-string-to-lower.html">L&ouml;sung Teil 1 - String To Lower</a></li>
+<li class="level4"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil2-string-compare-differences.html">L&ouml;sung Teil 2 - String Compare Differences</a></li>
+<li class="level4"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil3-string-remove-chars.html">L&ouml;sung Teil 3 - String Remove Chars</a></li>
+<li class="level4"><a href="tutorial-strings-zeichenketten-uebungen-loesung-teil4-string-replace.html">L&ouml;sung Teil 4 - String Replace</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Schreiben &amp; Lesen zeichenweise Programmieren in C HowTo</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link rel="canonical" href="http://www.c-howto.de/tutorial-dateiverarbeitung-zeichen-schreiben-lesen.html" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-dateiverarbeitung-datei-oeffnen-schliessen.html" title="">&Ouml;ffnen &amp; Schlie&szlig;en</a></div>
+	<div class="nextLink"><a href="tutorial-dateiverarbeitung-formatiertes-lesen-schreiben.html" title="">Schreiben &amp; Lesen formatiert</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial (deutsch)</h1>
+<h2>Dateiverarbeitung</h2>
+<h3>Schreiben &amp; Lesen zeichenweise</h3></div>
+<div id="content">
+
+
+<a name="553"></a>
+
+<div class="function"><p>int fputc(int c, FILE *fp);</p></div>
+
+<a name="554"></a>
+<div class="exText">
+<p>M&ouml;chte man zeichenweise in eine Datei schreiben, verwenden wir <strong>fputc</strong> (<strong>File Put Char</strong>). In diesem Beispiel wird das Alphabet in Gro&szlig;buchstaben in die Datei <strong>abc.txt</strong> geschrieben. Im Parameter <strong>c</strong> wird das zu schreibende Zeichen als <a href="tutorial-anhang-ascii-tabelle.html">ASCII-Code</a> &uuml;bergeben. Der Parameter <strong>fp</strong> (filepointer) gibt den Datei-Zeiger an.</p><p>Der R&uuml;ckgabewert ist das geschriebene Zeichen oder bei einem Fehler <strong><a href="tutorial-dateiverarbeitung-zeichen-schreiben-lesen.html#557">EOF</a></strong>, was unten erkl&auml;rt wird.</p>
+</div>
+
+
+<a name="555"></a>
+<div class="code">
+<pre>
+FILE *fp;
+int i;
+
+fp = fopen(&quot;abc.txt&quot;, &quot;w&quot;);
+
+if(fp == NULL) {
+	printf(&quot;Datei konnte nicht geoeffnet werden.\n&quot;);
+}else {
+	for(i=0; i&lt;26; i++) {
+		fputc(i+65, fp);
+	}
+	// Zeilenumbruch hinzufuegen
+	fputc(10, fp);
+	fclose(fp);
+}
+</pre>
+</div>
+
+
+<a name="556"></a>
+
+<div class="function"><p>int fgetc(FILE *fp);</p></div>
+
+<a name="557"></a>
+<div class="exText">
+<p>Mit <strong>File Get Char</strong> k&ouml;nnen wir eine Datei Zeichen f&uuml;r Zeichen auslesen. Dies soll im n&auml;chsten Beispiel anhand der oben erstellten Datei <strong>abc.txt</strong> dargestellt werden. In diesem Zusammenhang lernen wir noch das Ende-Zeichen einer Datei kennen: <strong>EOF</strong> - <strong>End Of File</strong>. Nachdem wir ein Zeichen gelesen haben, rutscht der Datei-Zeiger eine Position weiter. Wenn wir nun den Zeiger mit <strong>EOF</strong> vergleichen, &nbsp;erfahren wir, ob wir am Ende der Datei angelangt sind. In folgendem Beispiel wird solange ausgelesen, bis die Funktion den Wert <strong>End Of File</strong> liefert. Der R&uuml;ckgabewert ist der <a href="tutorial-anhang-ascii-tabelle.html">ASCII-Code</a> des gelesenen Zeichens bzw. <strong>EOF</strong> bei Fehler oder Dateiende.</p>
+</div>
+
+
+<a name="558"></a>
+<div class="code">
+<pre>
+FILE *fp;
+int i, temp;
+
+fp = fopen(&quot;abc.txt&quot;, &quot;r&quot;);
+
+if(fp == NULL) {
+	printf(&quot;Datei konnte nicht geoeffnet werden.\n&quot;);
+}else {
+	// komplette Datei zeichenweise ausgeben
+	while((temp = fgetc(fp))!=EOF) {
+		printf(&quot;%c &quot;, temp);
+	}
+	fclose(fp);
+}
+	
+printf(&quot;\n&quot;);
+</pre>
+</div>
+
+
+<a name="559"></a>
+<div class="screen">
+<pre>
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-dateiverarbeitung-datei-oeffnen-schliessen.html" title="">&Ouml;ffnen &amp; Schlie&szlig;en</a></div>
+	<div class="nextLink"><a href="tutorial-dateiverarbeitung-formatiertes-lesen-schreiben.html" title="">Schreiben &amp; Lesen formatiert</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level3"><a href="tutorial-dateiverarbeitung-datei-oeffnen-schliessen.html">&Ouml;ffnen &amp; Schlie&szlig;en</a></li>
+<li class="level3a"><a href="tutorial-dateiverarbeitung-zeichen-schreiben-lesen.html">Schreiben &amp; Lesen zeichenweise</a></li>
+<li class="level3"><a href="tutorial-dateiverarbeitung-formatiertes-lesen-schreiben.html">Schreiben &amp; Lesen formatiert</a></li>
+<li class="level3"><a href="tutorial-dateiverarbeitung-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="c-tutorial-download.html">Download</a></li>
+<li class="level1"><a href="lesermeinungen.html">Lesermeinungen</a></li>
+<li class="level1"><a href="leserfragen.html">Leserfragen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>
+&nbsp;&nbsp;<a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a><br />
+&nbsp;&nbsp;<a href="http://www.twitter.com/CHowTo" target="_blank" title="Das C-HowTo bei Twitter">Twitter</a>
+</p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

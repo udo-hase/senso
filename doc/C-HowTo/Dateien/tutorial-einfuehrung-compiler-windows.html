@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title>Kompilieren unter Windows in C</title>
+<meta name="description" content="Eine Erkl&auml;rung zu &quot;Wie kompiliert man C Code mit Dev Cpp unter Windows zu einem ausf&uuml;hrbaren Programm.&quot;" />
+<meta name="keywords" content="compiler, Kompilieren, Erkl&auml;rung, Programm, Dev, cpp, devcpp, Windows, ausf&uuml;hrbar" />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+<meta http-equiv="content-language" content="de" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<link href="css/style.css" type="text/css" media="screen,projection" rel="stylesheet" />
+<script src="js/correo.js" type="text/javascript"></script>
+<!--[if lt IE 7]><style type="text/css">@import url("css/ie.css");</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">@import url("css/ie7.css");</style><![endif]-->
+</head>
+<body>
+<div id="theBook">
+<a href="buch-bestellen.html">
+<img src="images/buchhinweis.gif" alt="C Handbuch bestellen" /></a>
+</div>
+
+<div id="container">
+<div id="header"><a href="http://www.c-howto.de">&nbsp;</a></div>
+<div id="main">
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-compiler-linux.html">Kompilieren unter Linux Programmieren in C</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-kommentare.html">Programm-Kommentare</a></div>
+	<div class="clearboth"></div>
+</div>
+<div id="headings">
+<h1>Das C Tutorial</h1>
+<h2>Einf&uuml;hrung</h2>
+<h3>Compiler</h3>
+<h4>Kompilieren unter Windows in C</h4></div>
+<div id="content">
+
+
+<a name="632"></a>
+<p>F&uuml;r das Kompilieren unter Windows wird hier das Programm <strong>Dev-C++</strong> vorgestellt. Es bietet eine grafische Benutzeroberfl&auml;che und ist kostenlos verf&uuml;gbar.</p>
+
+<a name="633"></a>
+<div class="exTextBoth">
+<h4>Download &amp; Installation</h4>
+<p><strong>Dev-C++</strong> kann unter <a href="http://www.bloodshed.net/devcpp.html">http://www.bloodshed.net/devcpp.html</a> mit einem Klick auf &quot;Goto Download Page&quot; heruntergeladen werden. Danach wird die Datei einfach mit einem Doppelklick ausgef&uuml;hrt und die Installation mit den vorgegebenen Standard-Werten durchgef&uuml;hrt. Programmiert wird meist in englischer Sprache, deshalb wurde der Compiler auch in Englisch installiert. Damit deine Ansicht mit der Anleitung &uuml;bereinstimmt, sollte gleich am Anfang die Sprache <strong>Englisch</strong> ausgew&auml;hlt werden.</p>
+</div>
+
+
+<a name="635"></a>
+<div class="exTextBoth">
+<h4>Programm kompilieren</h4>
+<p>Nach der Installation kann man <strong>Dev-C++</strong> starten. Wir wollen nun das Kompilieren mit <strong>Dev-C++</strong> mit einem &quot;<a href="tutorial-einfuehrung-hello-world.html">Hello World </a>&quot;-Programm testen. Wir klicken dazu auf <strong>File -&gt; New -&gt; Project</strong>, um ein neues Projekt zu erstellen und erhalten die folgende Ansicht, welche wir mit diesen Werten ausf&uuml;llen: </p>
+<ul>
+<li><strong>Console Application</strong>, erstellt eine einfache Konsolenanwendung f&uuml;r die Eingabeaufforderung</li>
+<li><strong>C-Project</strong>, erstellt ein C-Programm</li>
+<li><strong>Name</strong>, der Name des Programms, z.B. HelloWorld</li></ul>
+
+</div>
+
+
+<a name="636"></a>
+<img src="pictures/0000000636/5_0000000001.png" alt="Dev-Cpp Projekt erstellen" />
+
+<a name="637"></a>
+<p>Nach einem Klick auf <strong>OK</strong> geben wir noch einen Speicherort f&uuml;r das neue Projekt an. Danach erhalten wir bereits ein lauff&auml;higes Programm. Im n&auml;chsten Bild ist die Zeile markiert, in der wir unseren eigenen Quelltext schreiben k&ouml;nnen. Die Zeile <strong>system(&quot;PAUSE&quot;);</strong> am Ende des Quelltextes bewirkt, dass sich das Programm am Ende nicht sofort schlie&szlig;t, sondern noch auf einen Tastendruck wartet und somit die Programm-Ausgabe sichtbar bleibt. </p>
+
+<a name="638"></a>
+<img src="pictures/0000000638/5_0000000001.png" alt="Dev-Cpp Ansicht neues Projekt" />
+
+<a name="639"></a>
+<p>Wir wollen nun dieses Programm kompilieren. Dies geht &uuml;ber <strong>Execute -&gt; Compile</strong>. Danach erscheint ein Fenster mit Status <strong>Done</strong>.</p>
+
+<a name="640"></a>
+<img src="pictures/0000000640/5_0000000001.png" alt="Dev-Cpp Kompilieren fertig" />
+
+<a name="641"></a>
+<p>Nachdem das Programm kompiliert ist, k&ouml;nnen wir es &uuml;ber <strong>Execute -&gt; Run</strong> ausf&uuml;hren. Wir werden noch nach dem Speicherort der Quelltext-Datei gefragt, diese k&ouml;nnen wir in dasselbe Verzeichnis wie die Projektdatei platzieren. Der Standard-Dateiname ist <strong>main.c</strong>. </p><p>Die Programm-Ausgabe erscheint in einem Terminal-Fenster mit schwarzem Hintergrund. Aufgrund der Programmzeile <strong>system(&quot;PAUSE&quot;);</strong> bleibt es solange ge&ouml;ffnet, bis eine beliebige Taste gedr&uuml;ckt wird.</p>
+
+<a name="642"></a>
+<img src="pictures/0000000642/5_0000000001.png" alt="Dev-Cpp Eingabeaufforderung" />
+
+<a name="643"></a>
+<p>Wir k&ouml;nnen nun beginnen die Programm-Vorlage zu individualisieren und eine Ausgabe mit &quot;Hello World&quot; einf&uuml;gen. Alternativ kann man auch den Quelltext von unserem <a href="tutorial-einfuehrung-hello-world.html">HelloWorld </a>-Programm einf&uuml;gen.</p>
+
+<a name="644"></a>
+<img src="pictures/0000000644/5_0000000001.png" alt="Dev-Cpp Hello World" />
+
+<a name="645"></a>
+<p>Die Schritte Kompilieren und Ausf&uuml;hren lassen sich &uuml;ber <strong>Execute -&gt; Compile &amp; Run</strong> auch mit einem Klick ausf&uuml;hren. Noch schneller geht dies mit der Taste <strong>F9</strong>.</p>
+
+<a name="646"></a>
+<img src="pictures/0000000646/5_0000000001.png" alt="Dev-Cpp Hello World Ausgabe" />
+
+<a name="871"></a>
+<div class="exTextBoth">
+<h4>C-HowTo Code-Beispiele</h4>
+<p>Die Beispiele in diesem HowTo wurden f&uuml;r Linux verfasst, sie sind aber auch mit einer Ausnahme unter Windows lauff&auml;hig. Damit man wie schon erw&auml;hnt die Bildschirmausgabe sieht, sollte beim Kompilieren mit Dev-C++ immer <strong>zus&auml;tzlich</strong> die Zeile <strong>system(&quot;PAUSE&quot;);</strong> am Programmende vor die <strong>return </strong>Anweisung gesetzt werden.</p>
+</div>
+
+
+<a name="872"></a>
+<div class="code">
+<pre>
+	...
+	system(&quot;PAUSE&quot;);
+	return 0;
+}
+</pre>
+</div>
+
+</div>
+<!-- end content -->
+
+<div class="prevNextNavi">
+	<div class="prevLink"><a href="tutorial-einfuehrung-compiler-linux.html">Kompilieren unter Linux Programmieren in C</a></div>
+	<div class="nextLink"><a href="tutorial-einfuehrung-kommentare.html">Programm-Kommentare</a></div>
+	<div class="clearboth"></div>
+</div>
+
+</div>
+<!-- end main -->
+
+<div id="sidebar">
+
+<div id="menu">
+<ul>
+
+<li class="level1"><a href="tutorial.html">C Tutorial</a></li>
+<li class="level2"><a href="tutorial-einfuehrung.html">Einf&uuml;hrung</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programmieren.html">Programmieren</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-programm.html">Programm?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-c.html">Warum C?</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hello-world.html">Hello World</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-anfang.html">Der Anfang</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-compiler.html">Compiler</a></li>
+<li class="level4"><a href="tutorial-einfuehrung-compiler-linux.html">Linux</a></li>
+<li class="level4a"><a href="tutorial-einfuehrung-compiler-windows.html">Windows</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-kommentare.html">Kommentare</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-binaersystem.html">Bin&auml;rsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-hexadezimalsystem.html">Hexadezimalsystem</a></li>
+<li class="level3"><a href="tutorial-einfuehrung-bits-bytes.html">Bits und Bytes</a></li>
+<li class="level2"><a href="tutorial-variablen.html">Variablen</a></li>
+<li class="level2"><a href="tutorial-benutzerinteraktion.html">Benutzerinteraktion</a></li>
+<li class="level2"><a href="tutorial-verzweigungen.html">Verzweigungen</a></li>
+<li class="level2"><a href="tutorial-schleifen.html">Schleifen</a></li>
+<li class="level2"><a href="tutorial-funktionen.html">Funktionen</a></li>
+<li class="level2"><a href="tutorial-zeiger.html">Zeiger</a></li>
+<li class="level2"><a href="tutorial-arrays-felder.html">Arrays (Felder)</a></li>
+<li class="level2"><a href="tutorial-variablen-konstanten.html">Variablen &amp; Konstanten</a></li>
+<li class="level2"><a href="tutorial-strings-zeichenketten.html">Strings (Zeichenketten)</a></li>
+<li class="level2"><a href="tutorial-strukturierte-datentypen.html">Strukturierte Datentypen</a></li>
+<li class="level2"><a href="tutorial-dateiverarbeitung.html">Dateiverarbeitung</a></li>
+<li class="level2"><a href="tutorial-praeprozessor.html">Pr&auml;prozessor</a></li>
+<li class="level2"><a href="tutorial-zeitfunktionen.html">Zeitfunktionen</a></li>
+<li class="level2"><a href="tutorial-funktionen-teil2.html">Funktionen Teil 2</a></li>
+<li class="level2"><a href="tutorial-makefiles.html">Makefiles</a></li>
+<li class="level2"><a href="tutorial-uebungen.html">&Uuml;bungen</a></li>
+<li class="level2"><a href="tutorial-anhang.html">Anhang</a></li>
+<li class="level1"><a href="buch-bestellen.html">C Handbuch bestellen</a></li>
+<li class="level1"><a href="autor.html">Autor</a></li>
+<li class="level1"><a href="kontakt-hilfe-fragen.html">Kontakt Hilfe Fragen</a></li>
+<li class="level1"><a href="imprint.html">Impressum</a></li>
+<li class="level1"><a href="sitemap.html">Sitemap</a></li>
+</ul>
+<p>&nbsp;&nbsp;<strong><a href="buch-bestellen.html" title="C-HowTo als Buch bestellen">Buch bestellen</a></strong></p>
+</div>
+
+<div id="search">
+<form action="http://www.google.de/cse" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-0274970535787777:j3t0g2bki6g" />
+<input type="hidden" name="ie" value="ISO-8859-15" />
+<input id="searchText" type="text" name="q" size="10" /><br />
+<input id="searchSubmit" type="submit" name="sa" value="Suchen" />
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=de"></script>
+</div>
+
+
+<!-- (eae -->
+<div id="misc">
+
+
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=chowto">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='chowto' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img src=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=chowto&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+</div>
+<!-- end misc -->
+
+<!-- eae) -->
+
+
+
+</div>
+<!-- end sidebar -->
+
+<div class="clearboth"></div>
+
+<div id="footer">
+<div id="bookmark"><p>Diese Seite vermerken: </p>
+<a title="Bookmark bei Mr. Wong" onclick="window.open('http://www.mister-wong.de/index.php?action=addurl&bm_url='+encodeURIComponent(location.href)+'&bm_notice=&bm_description='+encodeURIComponent(document.title)+'&bm_tags=');return false;" href="http://www.mister-wong.de/" rel="nofollow" style="text-decoration: none;"><img alt="Webdesign Bookmark bei Mr. Wong" src="http://www.eliasfischer.de/m/bmb/mrwong.gif" /></a>
+
+<a title="Bookmark bei Webnews" onclick="window.open('http://www.webnews.de/einstellen?url='+encodeURIComponent(document.location)+'&title='+encodeURIComponent(document.title));return false;" href="http://www.webnews.de/" rel="nofollow"><img alt="Webdesign Bookmark bei Webnews" src="http://www.eliasfischer.de/m/bmb/webnews.gif" /></a>
+
+<a title="Bookmark bei Delicious" onclick="window.open('http://del.icio.us/post?v=2&url='+encodeURIComponent(location.href)+'&notes=&tags=&title='+encodeURIComponent(document.title));return false;" href="http://del.icio.us/" rel="nofollow"><img alt="Webdesign Bookmark bei Delicious" src="http://www.eliasfischer.de/m/bmb/del.gif" /></a>
+
+<a title="Bookmark bei Google" onclick="window.open('http://www.google.com/bookmarks/mark?op=add&hl=de&bkmk='+encodeURIComponent(location.href)+'&annotation=&labels=&title='+encodeURIComponent(document.title));return false;" href="http://www.google.com/" rel="nofollow"><img alt="Webdesign Bookmark bei Google" src="http://www.eliasfischer.de/m/bmb/google.gif" /></a>
+</div>
+<!-- end bookmark -->
+
+
+<p>&copy; c-howto.de  - <a href="imprint.html">Impressum</a></p>
+</div>
+<!-- end footer -->
+
+</div>
+<!-- end container -->
+
+<script type="text/javascript"><!--
+document.write("<img src=http://tracker.pagery.de/tracker/image.php?"+
+"&amp;ref="+escape(document.referrer)+
+"&amp;doc="+escape(document.URL)+" />");
+//--></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6000697-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>
