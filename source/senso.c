@@ -10,7 +10,9 @@
 #include<time.h>
 #include<arduPi.h>
 
+#define DEBUG 1
 #define LOGFILE "/home/pi/senso/log/senso.log"
+#define DATAFILE "/home/pi/senso/data/data.csv"
 
 /*Variablendefinition */
 struct addr {
@@ -26,17 +28,35 @@ struct addr {
 	int temp;
 	char rfid[10];
 	};
-FILE *logfile;
+FILE *logfile; //LOGFILE
+FILE *dfile;   //Datenfile
 
 // initialisiere Logfile
 int init_log() {
-	printf("using Logfile %s....\n",LOGFILE);
+	if (DEBUG) {
+		printf("using Logfile %s....\n",LOGFILE);
+	}
 	if( (logfile=fopen(LOGFILE,"a")) == NULL){
 		return(-1);
 	}
 	return(0);
 }
 
+//initialisieren Datafile
+int init_data() {
+	if (DEBUG) {
+		printf("using Datafile %s....\n",DATAFILE);
+	}
+	if( (dfile=fopen(DATAFILE,"a")) == NULL){
+		return(-1);
+	}
+	return(0);
+}
+
+int write_data( struct addr *ad ){
+	fprintf(dfile,"%s;%c;%s;%c;%s,%s;%d\n",ad->lat,ad->n,ad->lon,ad->w,ad->utc,ad->rfid,ad->temp);
+	return (0);	
+}
 
 // log output
 void log(const char *str) {
@@ -47,9 +67,11 @@ void log(const char *str) {
 	sprintf(timestr,"%s",ctime(&mytime));
 	len=strlen(timestr);
 	timestr[len-1]=0x00;
-	printf("%s: %s\n",timestr,str);
-	fprintf(logfile,"%s: %s\n",timestr,str);
+	if (DEBUG) {
+		printf("%s: %s\n",timestr,str);
 	}
+	fprintf(logfile,"%s: %s\n",timestr,str);
+}
 
 //rfid sensor initialisierung
 void setup_rfid(){
@@ -155,12 +177,16 @@ int get_rfid(struct addr *ad) {
 
 int main() {
 	int ret;
-//	char ch;
 	char logstr[200];
 	struct addr ad;
 	
 	if(init_log() != 0 ) {
 		printf("Fehler beim initialisieren des Logfile! \n");
+		return (-1);
+	};
+	
+	if(init_data() != 0 ) {
+		printf("Fehler beim initialisieren des Datenfile! \n");
 		return (-1);
 	};
 	
@@ -217,6 +243,15 @@ int main() {
 		sprintf(logstr,"Temperatur: %d°C",ad.temp);
 		log(logstr);
 	}
+	//write data to file
+	ret=write_data(&ad);
+	if ( ret != 0 ) {
+		log("Fehler beim schreiben des Datensatzes!");
+		return 1;
+	} else {
+		log("Datensatz erfolgreich geschrieben");
+	}
+	fclose(dfile);
 	fclose(logfile);
 	return 0;
 	}
