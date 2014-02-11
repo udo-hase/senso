@@ -1,46 +1,24 @@
-Sat Feb  8 22:13:36 2014: Messdatenerfassung
-Sat Feb  8 22:13:36 2014: Ablauf:
-Sat Feb  8 22:13:36 2014: 	-GPS Standorterfassung
-Sat Feb  8 22:13:36 2014: 	-Erfassung Nummer Messglass
-Sat Feb  8 22:13:36 2014: 	-warte auf Taste und lese dann Temperatursensor
-Sat Feb  8 22:13:36 2014: ----------------------------------------------------
-Sat Feb  8 22:13:36 2014: lese GPS-Standortdaten
-Sat Feb  8 22:13:36 2014: GPS erfolgreich ausgelesen:
-Sat Feb  8 22:13:36 2014: GPS Standort:
-Sat Feb  8 22:13:36 2014: 	-Vendor:	$GPGSV
-Sat Feb  8 22:13:36 2014: 	-Latitude:	3723.2475
-Sat Feb  8 22:13:36 2014: 	-North:		N
-Sat Feb  8 22:13:36 2014: 	-Longitude:	12158.3416
-Sat Feb  8 22:13:36 2014: 	-West:		W
-Sat Feb  8 22:13:36 2014: 	-UTC:		161229.487
-Sat Feb  8 22:13:36 2014: 	-valid Data:	A
-Sat Feb  8 22:13:36 2014: lese RFID Sensor aus
-Sat Feb  8 22:13:36 2014: RFID erfolgreich ausgelesen:
-Sat Feb  8 22:13:36 2014: RFID Nummer: 815
-Sat Feb  8 22:13:36 2014: warte auf Taste.....
-Sat Feb  8 22:13:40 2014: lese Temperatursensor aus..
-Sat Feb  8 22:13:40 2014: Temperatur erfolgreich ausgelesen:
-Sat Feb  8 22:13:40 2014: Temperatur: 20°C
-Sat Feb  8 22:13:57 2014: Messdatenerfassung
-Sat Feb  8 22:13:57 2014: Ablauf:
-Sat Feb  8 22:13:57 2014: 	-GPS Standorterfassung
-Sat Feb  8 22:13:57 2014: 	-Erfassung Nummer Messglass
-Sat Feb  8 22:13:57 2014: 	-warte auf Taste und lese dann Temperatursensor
-Sat Feb  8 22:13:57 2014: ----------------------------------------------------
-Sat Feb  8 22:13:57 2014: lese GPS-Standortdaten
-Sat Feb  8 22:13:57 2014: GPS erfolgreich ausgelesen:
-Sat Feb  8 22:13:57 2014: GPS Standort:
-Sat Feb  8 22:13:57 2014: 	-Vendor:	$GPGSV
-Sat Feb  8 22:13:57 2014: 	-Latitude:	3723.2475
-Sat Feb  8 22:13:57 2014: 	-North:		N
-Sat Feb  8 22:13:57 2014: 	-Longitude:	12158.3416
-Sat Feb  8 22:13:57 2014: 	-West:		W
-Sat Feb  8 22:13:57 2014: 	-UTC:		161229.487
-Sat Feb  8 22:13:57 2014: 	-valid Data:	A
-Sat Feb  8 22:13:57 2014: lese RFID Sensor aus
-Sat Feb  8 22:13:57 2014: RFID erfolgreich ausgelesen:
-Sat Feb  8 22:13:57 2014: RFID Nummer: 815
-Sat Feb  8 22:13:57 2014: warte auf Taste.....
-Sat Feb  8 22:14:00 2014: lese Temperatursensor aus..
-Sat Feb  8 22:14:00 2014: Temperatur erfolgreich ausgelesen:
-Sat Feb  8 22:14:00 2014: Temperatur: 20°C
+Tue Feb 11 15:45:32 2014: Messdatenerfassung 
+Tue Feb 11 15:45:32 2014: Bibliotheksrevision: 0
+Tue Feb 11 15:45:32 2014: ----------------------------------------------------
+Tue Feb 11 15:45:32 2014: lese GPS-Standortdaten
+Tue Feb 11 15:45:32 2014: GPS erfolgreich ausgelesen:
+Tue Feb 11 15:45:32 2014: GPS Standort:
+Tue Feb 11 15:45:32 2014: 	-Vendor:	$GPGSV
+Tue Feb 11 15:45:32 2014: 	-Latitude:	3723.2475
+Tue Feb 11 15:45:32 2014: 	-North:		N
+Tue Feb 11 15:45:32 2014: 	-Longitude:	12158.3416
+Tue Feb 11 15:45:32 2014: 	-West:		W
+Tue Feb 11 15:45:32 2014: 	-UTC:		161229.487
+Tue Feb 11 15:45:32 2014: 	-valid Data:	A
+Tue Feb 11 15:45:32 2014: lese RFID Sensor aus
+Tue Feb 11 15:45:32 2014: initialisiere rfid sensor..
+Tue Feb 11 15:45:33 2014: RFID module started in Auto Read Mode
+
+Tue Feb 11 15:46:03 2014: EM4100 card found - Code: 
+Tue Feb 11 15:46:03 2014: RFID erfolgreich ausgelesen:
+Tue Feb 11 15:46:03 2014: RFID Nummer: 6607761b4
+Tue Feb 11 15:46:03 2014: warte auf Taste.....
+Tue Feb 11 15:46:20 2014: lese Temperatursensor aus..
+Tue Feb 11 15:46:20 2014: Temperatur erfolgreich ausgelesen:
+Tue Feb 11 15:46:20 2014: Temperatur: 20°C

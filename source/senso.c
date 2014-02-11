@@ -1,8 +1,16 @@
+//Programm zur Abwasser-Messdatenerfassung 
+//  - auslesen GPS Position
+//  - auslesen RFID Sensor vom Messglass
+//  - auslesen Probetemperatur
+//
+
 #include<stdio.h>
 #include<stdint.h>
 #include<string.h>
 #include<time.h>
 #include<arduPi.h>
+
+#define LOGFILE "/home/pi/senso/log/senso.log"
 
 /*Variablendefinition */
 struct addr {
@@ -16,14 +24,18 @@ struct addr {
 	char mode;
 	char checksum[10];
 	int temp;
-	int rfid;
+	char rfid[10];
 	};
 FILE *logfile;
 
 // initialisiere Logfile
 int init_log() {
-	logfile=fopen("/home/uwe/Raspberry/sensor/log/senso.log","a");
+	printf("using Logfile %s....\n",LOGFILE);
+	if( (logfile=fopen(LOGFILE,"a")) == NULL){
+		return(-1);
 	}
+	return(0);
+}
 
 
 // log output
@@ -35,10 +47,42 @@ void log(const char *str) {
 	sprintf(timestr,"%s",ctime(&mytime));
 	len=strlen(timestr);
 	timestr[len-1]=0x00;
+	printf("%s: %s\n",timestr,str);
 	fprintf(logfile,"%s: %s\n",timestr,str);
 	}
 
-/* Funktionsdeklaration */
+//rfid sensor initialisierung
+void setup_rfid(){
+	int led = 13;
+        // Start serial port 19200 bps
+        Serial.begin(19200);
+        pinMode(led, OUTPUT);
+
+        delay(500);
+
+        // Setting Auto Read Mode - EM4102 Decoded Mode - No password
+        // command: FF 01 09 87 01 03 02 00 10 20 30 40 37
+        Serial.print(0xFF,BYTE);
+        Serial.print(0x01,BYTE);
+        Serial.print(0x09,BYTE);
+        Serial.print(0x87,BYTE);
+        Serial.print(0x01,BYTE);
+        Serial.print(0x03,BYTE);
+        Serial.print(0x02,BYTE);
+        Serial.print(0x00,BYTE);
+        Serial.print(0x10,BYTE);
+        Serial.print(0x20,BYTE);
+        Serial.print(0x30,BYTE);
+        Serial.print(0x40,BYTE);
+        Serial.print(0x37,BYTE);
+
+        delay(500);
+        Serial.flush();
+        log("RFID module started in Auto Read Mode\n");
+}
+
+
+
 /*Funktion liest den GPS-Sensor aus*/
 int get_gps( struct addr *ad) {
 //Ausgabe des GPS Sensors
@@ -66,7 +110,44 @@ int get_temp(struct addr *ad) {
 
 /*Funktion liest den RFID-Sensor aus*/
 int get_rfid(struct addr *ad) {
-	ad->rfid=815;
+	int led = 13;
+	byte data_1 = 0x00;
+	byte data_2 = 0x00;
+	byte data_3 = 0x00;
+	byte data_4 = 0x00;
+	byte data_5 = 0x00;
+	int val = 0;
+
+	val = Serial.read();
+    while (val != 0xff){
+        log("Waiting card\n");
+        val = Serial.read();
+        delay(1000);
+    }
+
+    // Serial.read();    // we read ff
+    Serial.read();    // we read 01
+    Serial.read();    // we read 06
+    Serial.read();    // we read 10
+    data_1 = Serial.read();    // we read data 1
+    data_2 = Serial.read();    // we read data 2
+    data_3 = Serial.read();    // we read data 3
+    data_4 = Serial.read();    // we read data 4
+    data_5 = Serial.read();    // we read data 5
+    Serial.read();    // we read checksum
+
+
+    // Led blink
+    for(int i = 0;i < 4;i++){
+       digitalWrite(led,HIGH);
+       delay(500);
+       digitalWrite(led,LOW);
+       delay(500);
+    }
+
+    // Printing the code of the card
+    log("EM4100 card found - Code: ");
+    sprintf(ad->rfid,"%x%x%x%x%x",data_1,data_2,data_3,data_4,data_5);
 	return 0;
 	}
 
@@ -74,17 +155,18 @@ int get_rfid(struct addr *ad) {
 
 int main() {
 	int ret;
-	int ch;
+//	char ch;
 	char logstr[200];
 	struct addr ad;
 	
-	init_log();
+	if(init_log() != 0 ) {
+		printf("Fehler beim initialisieren des Logfile! \n");
+		return (-1);
+	};
 	
-	log("Messdatenerfassung");
-	log("Ablauf:");
-	log("\t-GPS Standorterfassung");
-	log("\t-Erfassung Nummer Messglass");
-	log("\t-warte auf Taste und lese dann Temperatursensor");
+	log("Messdatenerfassung ");
+	sprintf(logstr,"Bibliotheksrevision: %d",REV);
+	log(logstr);
 	log("----------------------------------------------------");
 	
 	log("lese GPS-Standortdaten");
@@ -112,17 +194,19 @@ int main() {
 
 	}
 	log("lese RFID Sensor aus");
+	log("initialisiere rfid sensor..");
+	setup_rfid();
 	ret=get_rfid (&ad);
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der RFID-Daten!!");
 		return 1;
 	} else {
 		log("RFID erfolgreich ausgelesen:");
-		sprintf(logstr,"RFID Nummer: %d",ad.rfid);
+		sprintf(logstr,"RFID Nummer: %s",ad.rfid);
 		log(logstr);
 	}
 	log("warte auf Taste.....");
-	ch=getchar();
+	getchar();
 	log("lese Temperatursensor aus..");
 	ret=get_temp (&ad);
 	if ( ret != 0 ) {
@@ -133,6 +217,6 @@ int main() {
 		sprintf(logstr,"Temperatur: %d°C",ad.temp);
 		log(logstr);
 	}
-
+	fclose(logfile);
 	return 0;
 	}
