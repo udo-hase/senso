@@ -31,6 +31,18 @@ struct addr {
 FILE *logfile; //LOGFILE
 FILE *dfile;   //Datenfile
 
+//define substring function
+char *substr(size_t start, size_t stop, const char *src, char *dst, size_t size)
+{
+   int count = stop - start;
+   if ( count >= --size )
+   {
+      count = size;
+   }
+   sprintf(dst, "%.*s", count, src + start);
+   return dst;
+}
+
 // initialisiere Logfile
 int init_log() {
 	if (DEBUG) {
@@ -73,11 +85,21 @@ void log(const char *str) {
 	fprintf(logfile,"%s: %s\n",timestr,str);
 }
 
+//gps sensor initialisierung
+void setup_gps(){
+  //setup for mySerial port
+  Serial.begin(4800);  
+  printf("set serial speed to 4800..\n");
+  delay(1000);
+}
+
+
 //rfid sensor initialisierung
 void setup_rfid(){
 	int led = 13;
         // Start serial port 19200 bps
         Serial.begin(19200);
+        printf("set serial speed to 19200..\n");
         pinMode(led, OUTPUT);
 
         delay(500);
@@ -107,22 +129,58 @@ void setup_rfid(){
 
 /*Funktion liest den GPS-Sensor aus*/
 int get_gps( struct addr *ad) {
+// variables
+byte byteGPS = 0;
+int i = 0;
+int h = 0;
+
+// Buffer for data input
+char GPS_GGA[100]="";
+char GPS_BUFFER[100]="";
+
 //Ausgabe des GPS Sensors
-//$GPGLL,3723.2475,N,12158.3416,W,161229.487,A,A*41
-	strcpy(ad->vendor,"$GPGSV");//Vendor and message identifier
-	strcpy(ad->lat,"3723.2475");//Latitude (37deg 23.2475min)
-	ad->n='N';//N North; S South
-	strcpy(ad->lon,"12158.3416");//Longitude (121deg 58.3416min)
-	ad->w='W';//W West; E East
-	strcpy(ad->utc,"161229.487");//UTC - Universal Time Coordinated (16h 12m 29.487s)
-	ad->valid='A';//A Data Valid; V Data not Valid
-	ad->mode='A';//A Autonomous mode; D DGPS mode; E DR mode 
-	strcpy(ad->checksum,"*41");//Checksum
-	if (ad->valid != 'A') {
-			
+//$GPGGA,152145.000,4805.8193,N,01132.2317,E,1,04,2.5,607.5,M,47.6,M,,*67
+// Read GGA sentence from GPS
+  ad->valid=0; //invalidate GPS Data per see
+  do {
+	byteGPS = 0;
+	byteGPS = Serial.read();
+	while(byteGPS != 'A'){
+		byteGPS = Serial.read();
 	}
-	return 0;
+	GPS_GGA[0]='$';
+	GPS_GGA[1]='G';
+	GPS_GGA[2]='P';    
+	GPS_GGA[3]='G';
+	GPS_GGA[4]='G';
+	GPS_GGA[5]='A';
+  
+    i = 6;
+    while(byteGPS != '*'){                  
+      byteGPS = Serial.read();         
+      GPS_GGA[i]=byteGPS;
+      i++;                      
 	}
+	GPS_GGA[++i]=0x00;  
+	// print the GGA sentence to Log
+	printf("GGA sentence: ");
+	h = 0;
+	while(GPS_GGA[h] != 42){
+		printf("%c",GPS_GGA[h]);
+		h++;
+	}
+	printf("\n");
+  
+	strcpy(ad->vendor,"$GPGGA");//Vendor and message identifier
+	strcpy(ad->lat,substr(18,28,GPS_GGA,GPS_BUFFER,10));//Latitude (37deg 23.2475min)
+	ad->n=GPS_GGA[28];//N North; S South
+	strcpy(ad->lon,substr(30,40,GPS_GGA,GPS_BUFFER,sizeof GPS_BUFFER));//Longitude (121deg 58.3416min)
+	ad->w=GPS_GGA[41];//W West; E East
+	strcpy(ad->utc,substr(7,17,GPS_GGA,GPS_BUFFER,sizeof GPS_BUFFER));//UTC - Universal Time Coordinated (16h 12m 29.487s)
+	ad->valid=GPS_GGA[43];//1 Data Valid; 0 Data not Valid
+  } while (ad->valid != '1');	
+  return 0;
+}
 
 /*Funktion liest den Temepratur-Sensor aus*/
 int get_temp(struct addr *ad) {
@@ -190,12 +248,13 @@ int main() {
 		return (-1);
 	};
 	
+	log("########################################\n");
 	log("Messdatenerfassung ");
 	sprintf(logstr,"Bibliotheksrevision: %d",REV);
 	log(logstr);
-	log("----------------------------------------------------");
-	
 	log("lese GPS-Standortdaten");
+	log("initialisiere gps sensor..");
+	setup_gps();
 	ret=get_gps (&ad);
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der GPS-Daten!!");
@@ -221,8 +280,9 @@ int main() {
 	}
 	log("lese RFID Sensor aus");
 	log("initialisiere rfid sensor..");
-	setup_rfid();
-	ret=get_rfid (&ad);
+	//setup_rfid();
+	//ret=get_rfid (&ad);
+	ret=0;
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der RFID-Daten!!");
 		return 1;
@@ -251,6 +311,7 @@ int main() {
 	} else {
 		log("Datensatz erfolgreich geschrieben");
 	}
+	log("#############################################\n");
 	fclose(dfile);
 	fclose(logfile);
 	return 0;

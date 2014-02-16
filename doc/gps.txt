@@ -1,0 +1,1 @@
+ - arduPi.cpp Zeile in die Initialisierungsfunktion für Speed = 4800 eingefügt!!

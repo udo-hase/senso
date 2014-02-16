@@ -46,7 +46,6 @@ void loop(){
   byteGPS = 0;
   byteGPS = Serial.read();
   while(byteGPS != 'R'){
-printf("GPS-->%c\n",byteGPS);
     byteGPS = Serial.read();
   }
   GPS_RMC[0]='$';
