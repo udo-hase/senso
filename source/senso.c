@@ -4,15 +4,17 @@
 //  - auslesen Probetemperatur
 //
 
-#include<stdio.h>
-#include<stdint.h>
-#include<string.h>
-#include<time.h>
-#include<arduPi.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <time.h>
+#include <arduPi.h>
 
 #define DEBUG 1
 #define LOGFILE "/home/pi/senso/log/senso.log"
 #define DATAFILE "/home/pi/senso/data/data.csv"
+#define SENSOR "/sys/bus/w1/devices/28-000004d08e2d/w1_slave" //jeder Slave am W1 BUS hat eine eigene ID!!!
 
 /*Variablendefinition */
 struct addr {
@@ -22,10 +24,11 @@ struct addr {
 	char lon[15];
 	char w;
 	char utc[15];
-	char valid;
+	char gps_valid;
 	char mode;
 	char checksum[10];
-	int temp;
+	char temp[10];
+	char temp_valid[10];
 	char rfid[10];
 	};
 FILE *logfile; //LOGFILE
@@ -35,7 +38,7 @@ FILE *dfile;   //Datenfile
 char *substr(size_t start, size_t stop, const char *src, char *dst, size_t size)
 {
    int count = stop - start;
-   if ( count >= --size )
+   if ( (unsigned)count >= --size )
    {
       count = size;
    }
@@ -66,7 +69,7 @@ int init_data() {
 }
 
 int write_data( struct addr *ad ){
-	fprintf(dfile,"%s;%c;%s;%c;%s,%s;%d\n",ad->lat,ad->n,ad->lon,ad->w,ad->utc,ad->rfid,ad->temp);
+	fprintf(dfile,"%s;%c;%s;%c;%s,%s;%s\n",ad->lat,ad->n,ad->lon,ad->w,ad->utc,ad->rfid,ad->temp);
 	return (0);	
 }
 
@@ -141,7 +144,7 @@ char GPS_BUFFER[100]="";
 //Ausgabe des GPS Sensors
 //$GPGGA,152145.000,4805.8193,N,01132.2317,E,1,04,2.5,607.5,M,47.6,M,,*67
 // Read GGA sentence from GPS
-  ad->valid=0; //invalidate GPS Data per see
+  ad->gps_valid=0; //invalidate GPS Data per see
   do {
 	byteGPS = 0;
 	byteGPS = Serial.read();
@@ -177,16 +180,59 @@ char GPS_BUFFER[100]="";
 	strcpy(ad->lon,substr(30,40,GPS_GGA,GPS_BUFFER,sizeof GPS_BUFFER));//Longitude (121deg 58.3416min)
 	ad->w=GPS_GGA[41];//W West; E East
 	strcpy(ad->utc,substr(7,17,GPS_GGA,GPS_BUFFER,sizeof GPS_BUFFER));//UTC - Universal Time Coordinated (16h 12m 29.487s)
-	ad->valid=GPS_GGA[43];//1 Data Valid; 0 Data not Valid
-  } while (ad->valid != '1');	
+	ad->gps_valid=GPS_GGA[43];//1 Data Valid; 0 Data not Valid
+  } while (ad->gps_valid != '1');	
   return 0;
 }
 
 /*Funktion liest den Temepratur-Sensor aus*/
 int get_temp(struct addr *ad) {
-	ad->temp=20;
-	return 0;
+	FILE *w1_slave;
+	char tmp[100];
+	char yes[2][10];
+	char temp[2][10];
+	int i=0;
+	int h=0; //helper var for determining that two following values are the same
+	int same=0; //helper var, to set if two following values the same
+	yes[0][0]=0x00;yes[1][0]=0x00;
+	temp[0][0]=0x00;temp[1][0]=0x00;
+	
+	same=0;h=0;
+	while(same == 0) {
+		if( (w1_slave=fopen(SENSOR,"r")) == NULL){
+			printf("could not open Sesnor Device %s\n",SENSOR);
+		}
+		//read 5 lines of rubish
+		for(i=0;i<4;i++){
+			fgets(tmp,10,w1_slave);
+		}
+		//read the YES Flage, if the temp will be valid
+		fgets(yes[h],10,w1_slave); yes[h][3]=0x00;
+		//read 4 lines of rubish
+		for(i=0;i<3;i++){
+			fgets(tmp,10,w1_slave);
+		}
+		//read the temp
+		fgets(temp[h],10,w1_slave);temp[h][7]=0x00;
+		printf("yes[0]-->%s<--\n",yes[0]);
+		printf("temp[0]-->%s<--\n",&temp[0][2]);
+		printf("yes[1]-->%s<--\n",yes[1]);
+		printf("temp[1]-->%s<--\n",&temp[1][2]);
+		printf("------------------------\n");
+		if(strcmp(temp[0],temp[1]) == 0 && strcmp(yes[h],"YES") == 0){
+			same=1;	
+		} else {
+			h=1-h;
+			sleep(5);
+		}
+		fclose(w1_slave);
 	}
+	//printf("yes[%d]-->%s<--\n",h,yes[h]);
+	//printf("temp[%d]-->%s<--\n",h,temp[h]);
+	sprintf(ad->temp,"%s",&temp[h][2]);
+	sprintf(ad->temp_valid,"%s",yes[h]);
+	return 0;
+}
 
 /*Funktion liest den RFID-Sensor aus*/
 int get_rfid(struct addr *ad) {
@@ -254,8 +300,9 @@ int main() {
 	log(logstr);
 	log("lese GPS-Standortdaten");
 	log("initialisiere gps sensor..");
-	setup_gps();
-	ret=get_gps (&ad);
+	//setup_gps();
+	//ret=get_gps (&ad);
+	ret=0;
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der GPS-Daten!!");
 		return 1;
@@ -274,7 +321,7 @@ int main() {
 		log(logstr);
 		sprintf(logstr,"\t-UTC:\t\t%s",ad.utc);
 		log(logstr);
-		sprintf(logstr,"\t-valid Data:\t%c",ad.valid);
+		sprintf(logstr,"\t-valid Data:\t%c",ad.gps_valid);
 		log(logstr);
 
 	}
@@ -300,7 +347,7 @@ int main() {
 		return 1;
 	} else {
 		log("Temperatur erfolgreich ausgelesen:");
-		sprintf(logstr,"Temperatur: %d°C",ad.temp);
+		sprintf(logstr,"Temperatur: %s°C",ad.temp);
 		log(logstr);
 	}
 	//write data to file
