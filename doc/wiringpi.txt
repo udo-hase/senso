@@ -1,0 +1,38 @@
+WiringPi hat funktionen für das ansteueren der LCD-Tasten erweiterung von adafruit.
+--> http://wiringpi.com/
+
+--> Zusammenbau LCD
+- Zusammenbau der LCD Platine wie unter: http://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/assembly beschrieben
+- die LCD Platine arbeitet mit dem I2C Bus und braucht folgende kernel Module:
+	i2c-bcm2708
+	i2c-dev
+- die Module in /etc/modules einfügen und reboot bzw. modprobe :)
+- install the i2c Tools --> sudo apt-get install i2c-tools
+- nach aufstecken des LCD Moduls Busabfrage:
+    sudo i2cdetect -y 0 (if you are using a version 1 Raspberry Pi)
+    sudo i2cdetect -y 1 (if you are using a version 2 Raspberry Pi) 
+pi@raspberrypi ~ $ sudo i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: 20 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- -- 
+
+- der LCD kommt immer auf Addresse 20 :)
+- adafruit bietet eine python lib an. das beispiel funktioniert out of the box.
+- alles andere in C --> ich nutze die c-lib von wiringpi 
+
+--> Installation WiringPi
+- git clone git://git.drogon.net/wiringPi --> holt die Sourcen von githiub (version2)
+- cd wiringPi
+- git pull origin --> update
+- ./build --> baut die shared Librays und installiert diese
+- für die Examples unter examples make lcd-adafruit
+
+--> da die Funktionen in der arduPi lib teilweise genaus heissen, habe ich ein separates executable für die ansteuerung der LCD gebaut. das wird zur Zeit mit system aufgerufen
+
+

@@ -1,0 +1,10 @@
+--> start loop
+	- warten auf gps, wenn nach time x keine daten manuell standortnummer (fortlaufend vom system)
+	- gps pos erkannt --> standort bestätigen
+	- rfid erkennung kaltwasser (wenn nicht möglich, auf null gesetzt)--> RFID anzeigen, bestätigen
+	- temp kaltwasser lesen, wenn rfid nicht null, anzeigen, bestätigen
+	- rifd erkennung warmwasser--> RFID anzeigen bestätigen
+	- temp warmwasser lesen--> temp anzeigen bestätigen
+	- abfrage datensatz speichern, anzeige datensatz fertig oder abbruch
+<-- end loop
+

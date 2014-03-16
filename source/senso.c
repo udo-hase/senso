@@ -11,9 +11,15 @@
 #include <time.h>
 #include <arduPi.h>
 
+
+
 #define DEBUG 1
+#define LCD "../bin/lcd_senso"
+
 #define LOGFILE "/home/pi/senso/log/senso.log"
 #define DATAFILE "/home/pi/senso/data/data.csv"
+
+//define Adresse vom temp Sensor am W1 Bus
 #define SENSOR "/sys/bus/w1/devices/28-000004d08e2d/w1_slave" //jeder Slave am W1 BUS hat eine eigene ID!!!
 
 /*Variablendefinition */
@@ -31,6 +37,7 @@ struct addr {
 	char temp_valid[10];
 	char rfid[10];
 	};
+	 
 FILE *logfile; //LOGFILE
 FILE *dfile;   //Datenfile
 
@@ -87,6 +94,8 @@ void log(const char *str) {
 	}
 	fprintf(logfile,"%s: %s\n",timestr,str);
 }
+
+
 
 //gps sensor initialisierung
 void setup_gps(){
@@ -293,12 +302,18 @@ int main() {
 		printf("Fehler beim initialisieren des Datenfile! \n");
 		return (-1);
 	};
-	
+
+		
 	log("########################################\n");
 	log("Messdatenerfassung ");
 	sprintf(logstr,"Bibliotheksrevision: %d",REV);
 	log(logstr);
+	log("initialisiere LCD");
+	//system("../bin/lcd_senso i");
+	
 	log("lese GPS-Standortdaten");
+	//system("../bin/lcd_senso p 0 0 103 'lese GPS Daten  bitte warten...'");
+	sleep(5);
 	log("initialisiere gps sensor..");
 	//setup_gps();
 	//ret=get_gps (&ad);
@@ -308,6 +323,8 @@ int main() {
 		return 1;
 	} else {
 		log("GPS erfolgreich ausgelesen:");
+		//system("../bin/lcd_senso c");
+		//system("../bin/lcd_senso p 0 0 106 'GPS Data gelesen Bitte Select-->'");
 		log("GPS Standort:");
 		sprintf(logstr,"\t-Vendor:\t%s",ad.vendor);
 		log(logstr);
@@ -323,12 +340,16 @@ int main() {
 		log(logstr);
 		sprintf(logstr,"\t-valid Data:\t%c",ad.gps_valid);
 		log(logstr);
-
+		
 	}
+	//system("../bin/lcd_senso w");
 	log("lese RFID Sensor aus");
 	log("initialisiere rfid sensor..");
+	//system("../bin/lcd_senso c");
+	//system("../bin/lcd_senso p 0 0 103 'lese RFID Daten bitte warten...'");
 	//setup_rfid();
 	//ret=get_rfid (&ad);
+	//sleep(5);
 	ret=0;
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der RFID-Daten!!");
@@ -337,10 +358,16 @@ int main() {
 		log("RFID erfolgreich ausgelesen:");
 		sprintf(logstr,"RFID Nummer: %s",ad.rfid);
 		log(logstr);
+		//system("../bin/lcd_senso c");
+		//system("../bin/lcd_senso p 0 0 106 'RFID gelesen    Bitte Select-->'");
 	}
 	log("warte auf Taste.....");
 	getchar();
+	//system("../bin/lcd_senso w");
 	log("lese Temperatursensor aus..");
+	//system("../bin/lcd_senso c");
+	//system("../bin/lcd_senso p 0 0 103 'lese Probetemp. bitte warten...'");
+	//sleep(5);
 	ret=get_temp (&ad);
 	if ( ret != 0 ) {
 		log("Fehler beim auslesen der Temperatur!!");
@@ -349,6 +376,8 @@ int main() {
 		log("Temperatur erfolgreich ausgelesen:");
 		sprintf(logstr,"Temperatur: %s°C",ad.temp);
 		log(logstr);
+		//system("../bin/lcd_senso c");
+		//system("../bin/lcd_senso p 0 0 106 'Temp gelesen    Bitte Select-->'");
 	}
 	//write data to file
 	ret=write_data(&ad);
