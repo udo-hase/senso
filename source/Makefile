@@ -1,22 +1,18 @@
 VERSION = 0.1
 CC         = /usr/bin/g++
 INCLUDE    = -I/usr/local/include -I ../include
-CFLAGS     = -Wall $(INCLUDE) -g  -Winline -pipe
+CFLAGS     = -Wall $(INCLUDE) -g  -Winline -pipe 
 LDFLAGS    = -L../lib -L/usr/local/lib
-LDLIBS     = -lwiringPi -lwiringPiDev -lpthread -lm -lrt
+LDLIBS     = -lwiringPi -lwiringPiDev -lbcm2835 -lpthread -lm -lrt -Wwrite-strings
 
-OBJ = ../lib/arduPi.a
-SRC = senso.c menu.c
+OBJ = $(SRC:.c=.o)
+SRC = senso.c  config.c rfid.c rc522.c lcd_senso.c
 SPATH = /home/pi/senso/source
 BPATH = /home/pi/senso/bin
 
-senso: senso.o
+senso: $(OBJ)
 	@echo [link]
-	$(CC) $(CFLAGS) -o $@ senso.o $(OBJ) $(LDFLAGS) $(LDLIBS)
-
-menu: menu.o
-	@echo [link]
-	$(CC) $(CFLAGS) -o $@ menu.o  $(LDFLAGS) $(LDLIBS)
+	$(CC) $(CFLAGS) -o $@  $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 install:
 	mv $(SPATH)/senso $(BPATH)/senso
